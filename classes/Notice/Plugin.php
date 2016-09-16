@@ -71,4 +71,5 @@ class AC_Notice_Plugin {
 
 		wp_enqueue_style( 'ac-plugin-row', AC()->get_plugin_url() . 'assets/css/plugin-row.css' );
 	}
+
 }
