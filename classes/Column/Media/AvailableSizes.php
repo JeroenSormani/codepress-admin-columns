@@ -11,7 +11,7 @@ class AC_Column_Media_AvailableSizes extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-available_sizes';
+		$this->properties['type']  = 'column-available_sizes';
 		$this->properties['label'] = __( 'Available Sizes', 'codepress-admin-columns' );
 	}
 
@@ -41,16 +41,16 @@ class AC_Column_Media_AvailableSizes extends CPAC_Column {
 		// available sizes
 		if ( $intersect = array_intersect( array_keys( $sizes ), get_intermediate_image_sizes() ) ) {
 
-			$url = wp_get_attachment_url( $id );
+			$url      = wp_get_attachment_url( $id );
 			$filename = basename( $url );
-			$paths[] = "<a title='{$filename}' href='{$url}'>" . __( 'full size', 'codepress-admin-columns' ) . "</a>";
+			$paths[]  = "<a title='{$filename}' href='{$url}'>" . __( 'full size', 'codepress-admin-columns' ) . '</a>';
 
 			foreach ( $intersect as $size ) {
 				$src = wp_get_attachment_image_src( $id, $size );
 
 				if ( ! empty( $src[0] ) ) {
 					$filename = basename( $src[0] );
-					$paths[] = "<a title='{$filename}' href='{$src[0]}' class='available'>{$size}</a>";
+					$paths[]  = "<a title='{$filename}' href='{$src[0]}' class='available'>{$size}</a>";
 				}
 			}
 		}
@@ -70,7 +70,7 @@ class AC_Column_Media_AvailableSizes extends CPAC_Column {
 			}
 		}
 
-		return "<div class='sizes'>" . implode( '<span class="cpac-divider"></span>', $paths ) . "</div>";
+		return "<div class='sizes'>" . implode( '<span class="cpac-divider"></span>', $paths ) . '</div>';
 	}
 
 	public function get_raw_value( $id ) {
