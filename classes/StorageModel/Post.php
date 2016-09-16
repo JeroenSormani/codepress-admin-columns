@@ -7,14 +7,13 @@ class AC_StorageModel_Post extends CPAC_Storage_Model {
 	 * @since 2.0
 	 */
 	public function __construct( $post_type ) {
-
-		$this->key = $post_type;
-		$this->post_type = $post_type;
-		$this->type = 'post';
-		$this->meta_type = 'post';
-		$this->page = 'edit';
-		$this->screen = $this->page . '-' . $this->post_type;
-		$this->menu_type = __( 'Post Type', 'codepress-admin-columns' );
+		$this->key             = $post_type;
+		$this->post_type       = $post_type;
+		$this->type            = 'post';
+		$this->meta_type       = 'post';
+		$this->page            = 'edit';
+		$this->screen          = $this->page . '-' . $this->post_type;
+		$this->menu_type       = __( 'Post Type', 'codepress-admin-columns' );
 		$this->table_classname = 'WP_Posts_List_Table';
 
 		$this->set_labels();
@@ -26,7 +25,7 @@ class AC_StorageModel_Post extends CPAC_Storage_Model {
 	 * @since NEWVERSION
 	 */
 	public function init_column_values() {
-		add_action( "manage_" . $this->get_post_type() . "_posts_custom_column", array( $this, 'manage_value' ), 100, 2 );
+		add_action( 'manage_' . $this->get_post_type() . '_posts_custom_column', array( $this, 'manage_value' ), 100, 2 );
 	}
 
 	/**
@@ -50,7 +49,7 @@ class AC_StorageModel_Post extends CPAC_Storage_Model {
 	private function set_labels() {
 		$post_type_object = get_post_type_object( $this->get_post_type() );
 
-		$this->label = $post_type_object->labels->name;
+		$this->label          = $post_type_object->labels->name;
 		$this->singular_label = $post_type_object->labels->singular_name;
 	}
 
