@@ -9,7 +9,7 @@ class AC_Column_Media_AlternateText extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-alternate_text';
+		$this->properties['type']  = 'column-alternate_text';
 		$this->properties['label'] = __( 'Alt', 'codepress-admin-columns' );
 	}
 
