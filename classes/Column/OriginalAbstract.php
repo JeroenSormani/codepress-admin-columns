@@ -7,7 +7,7 @@ abstract class AC_Column_OriginalAbstract extends CPAC_Column {
 		parent::init();
 
 		$this->properties['is_cloneable'] = false;
-		$this->properties['original'] = true;
+		$this->properties['original']     = true;
 	}
 
 }
