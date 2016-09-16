@@ -7,8 +7,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 class AC_Helper_User {
 
 	/**
-	 * @param string $field
-	 * @param int $user_id
+	 * @param  string      $field
+	 * @param  int         $user_id
 	 *
 	 * @return bool|string
 	 */
@@ -27,8 +27,8 @@ class AC_Helper_User {
 	}
 
 	/**
-	 * @param $user
-	 * @param bool $format
+	 * @param               $user
+	 * @param  bool         $format
 	 *
 	 * @return false|string
 	 */
@@ -43,12 +43,11 @@ class AC_Helper_User {
 
 		if ( 'first_last_name' == $format ) {
 			$first = ! empty( $user->first_name ) ? $user->first_name : '';
-			$last = ! empty( $user->last_name ) ? " {$user->last_name}" : '';
+			$last  = ! empty( $user->last_name ) ? " {$user->last_name}" : '';
 			if ( $first || $last ) {
 				$name = $first . $last;
 			}
-		}
-		elseif ( ! empty( $user->{$format} ) ) {
+		} elseif ( ! empty( $user->{$format} ) ) {
 			$name = $user->{$format};
 		}
 
