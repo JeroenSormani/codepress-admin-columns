@@ -6,7 +6,6 @@ class AC_Admin_Columns {
 	CONST OPTION_CURRENT = 'cpac_current_model';
 
 	public function __construct() {
-
 		add_action( 'admin_init', array( $this, 'handle_column_request' ) );
 
 		add_action( 'wp_ajax_cpac_column_refresh', array( $this, 'ajax_column_refresh' ) );
@@ -30,9 +29,8 @@ class AC_Admin_Columns {
 	 * @since 1.0
 	 */
 	public function handle_column_request() {
-
 		$action = filter_input( INPUT_POST, 'cpac_action' );
-		$nonce = filter_input( INPUT_POST, '_cpac_nonce' );
+		$nonce  = filter_input( INPUT_POST, '_cpac_nonce' );
 
 		if ( ! $action || ! $nonce || ! cac_is_setting_screen() || ! current_user_can( 'manage_admin_columns' ) ) {
 			return;
@@ -53,7 +51,7 @@ class AC_Admin_Columns {
 						$storage_model->restore();
 						$storage_model->flush_columns();
 
-						cpac_settings_message( sprintf( __( 'Settings for %s restored successfully.', 'codepress-admin-columns' ), "<strong>" . esc_html( $storage_model->get_label_or_layout_name() ) . "</strong>" ), 'updated' );
+						cpac_settings_message( sprintf( __( 'Settings for %s restored successfully.', 'codepress-admin-columns' ), '<strong>' . esc_html( $storage_model->get_label_or_layout_name() ) . '</strong>' ), 'updated' );
 					}
 				}
 				break;
@@ -162,7 +160,7 @@ class AC_Admin_Columns {
 		}
 
 		wp_send_json_success(
-			sprintf( __( 'Settings for %s updated successfully.', 'codepress-admin-columns' ), "<strong>" . esc_html( $storage_model->get_label_or_layout_name() ) . "</strong>" )
+			sprintf( __( 'Settings for %s updated successfully.', 'codepress-admin-columns' ), '<strong>' . esc_html( $storage_model->get_label_or_layout_name() ) . '</strong>' )
 			. ' <a href="' . esc_attr( $storage_model->get_link() ) . '">' . esc_html( sprintf( __( 'View %s screen', 'codepress-admin-columns' ), $storage_model->label ) ) . '</a>'
 		);
 	}
@@ -205,7 +203,6 @@ class AC_Admin_Columns {
 	 * @return bool|CPAC_Storage_Model
 	 */
 	private function get_settings_storage_model() {
-
 		if ( isset( $_REQUEST['cpac_key'] ) ) {
 
 			// By request
@@ -214,7 +211,7 @@ class AC_Admin_Columns {
 			}
 
 			// User preference
-			else if ( $_storage_model = $this->get_user_model_preference() ) {
+			elseif ( $_storage_model = $this->get_user_model_preference() ) {
 				$storage_model = $_storage_model;
 			}
 
@@ -224,9 +221,7 @@ class AC_Admin_Columns {
 			}
 
 			$this->set_user_model_preference( $storage_model->key );
-		}
-
-		else {
+		} else {
 
 			// User preference
 			if ( $exists = $this->get_user_model_preference() ) {
@@ -316,7 +311,7 @@ class AC_Admin_Columns {
 						<div class="sidebox" id="pro-version">
 							<div class="padding-box cta">
 								<h3>
-									<a href="<?php echo add_query_arg( array_merge( $url_args, array( 'utm_content' => 'title' ) ), ac_get_site_url() ); ?>"><?php _e( 'Get Admin Columns Pro', 'codepress-admin-columns' ) ?></a>
+									<a href="<?php echo add_query_arg( array_merge( $url_args, array( 'utm_content' => 'title' ) ), ac_get_site_url() ); ?>"><?php _e( 'Get Admin Columns Pro', 'codepress-admin-columns' ); ?></a>
 								</h3>
 
 								<div class="inside">
@@ -437,13 +432,13 @@ class AC_Admin_Columns {
 			</div><!--.columns-right-->
 
 			<div class="columns-left">
-				<?php if ( ! $storage_model->get_default_stored_columns() && ! $storage_model->is_using_php_export() ): ?>
+				<?php if ( ! $storage_model->get_default_stored_columns() && ! $storage_model->is_using_php_export() ) : ?>
 					<div class="cpac-notice">
 						<p>
-							<?php echo sprintf( __( 'Please visit the %s screen once to load all available columns', 'codepress-admin-columns' ), "<a href='" . esc_url( $storage_model->get_link() ) . "'>" . esc_html( $storage_model->label ) . "</a>" ); ?>
+							<?php echo sprintf( __( 'Please visit the %s screen once to load all available columns', 'codepress-admin-columns' ), "<a href='" . esc_url( $storage_model->get_link() ) . "'>" . esc_html( $storage_model->label ) . '</a>' ); ?>
 						</p>
 					</div>
-				<?php endif ?>
+				<?php endif; ?>
 
 				<?php $this->messages(); ?>
 
@@ -484,7 +479,7 @@ class AC_Admin_Columns {
 							</div>
 							<div class="button-container">
 								<?php if ( apply_filters( 'ac/settings/enable_clear_columns_button', false ) ) : ?>
-									<a href="javascript:;" class="clear-columns" data-clear-columns><?php _e( 'Clear all columns ', 'codepress-admin-columns' ) ?></a>
+									<a href="javascript:;" class="clear-columns" data-clear-columns><?php _e( 'Clear all columns ', 'codepress-admin-columns' ); ?></a>
 								<?php endif; ?>
 
 								<span class="spinner"></span>
@@ -523,7 +518,7 @@ class AC_Admin_Columns {
 	private function display_column( CPAC_Column $column ) {
 		?>
 
-		<div class="cpac-column <?php echo esc_attr( implode( ' ', array_filter( array( "cpac-box-" . $column->get_type(), $column->get_property( 'classes' ) ) ) ) ); ?>" data-type="<?php echo esc_attr( $column->get_type() ); ?>"<?php echo $column->get_property( 'is_cloneable' ) ? ' data-clone="' . esc_attr( $column->get_property( 'clone' ) ) . '"' : ''; ?> data-default="<?php echo esc_attr( $column->is_default() ); ?>">
+		<div class="cpac-column <?php echo esc_attr( implode( ' ', array_filter( array( 'cpac-box-' . $column->get_type(), $column->get_property( 'classes' ) ) ) ) ); ?>" data-type="<?php echo esc_attr( $column->get_type() ); ?>"<?php echo $column->get_property( 'is_cloneable' ) ? ' data-clone="' . esc_attr( $column->get_property( 'clone' ) ) . '"' : ''; ?> data-default="<?php echo esc_attr( $column->is_default() ); ?>">
 			<input type="hidden" class="column-name" name="<?php $column->field_settings->attr_name( 'column-name' ); ?>" value="<?php echo esc_attr( $column->get_name() ); ?>"/>
 			<input type="hidden" class="type" name="<?php $column->field_settings->attr_name( 'type' ); ?>" value="<?php echo esc_attr( $column->get_type() ); ?>"/>
 			<input type="hidden" class="clone" name="<?php $column->field_settings->attr_name( 'clone' ); ?>" value="<?php echo esc_attr( $column->get_property( 'clone' ) ); ?>"/>
@@ -621,7 +616,6 @@ class AC_Admin_Columns {
 
 					/**
 					 * Load specific column settings.
-					 *
 					 */
 					$column->display_settings();
 
@@ -658,4 +652,5 @@ class AC_Admin_Columns {
 		</div><!--.cpac-column-->
 		<?php
 	}
+
 }
