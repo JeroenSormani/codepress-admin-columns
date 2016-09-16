@@ -12,7 +12,7 @@ abstract class AC_Column_TaxonomyAbstract extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-taxonomy';
+		$this->properties['type']  = 'column-taxonomy';
 		$this->properties['label'] = __( 'Taxonomy', 'codepress-admin-columns' );
 	}
 
@@ -34,7 +34,7 @@ abstract class AC_Column_TaxonomyAbstract extends CPAC_Column {
 		$this->field_settings->field( array(
 			'type'    => 'select',
 			'name'    => 'taxonomy',
-			'label'   => __( "Taxonomy", 'codepress-admin-columns' ),
+			'label'   => __( 'Taxonomy', 'codepress-admin-columns' ),
 			'options' => ac_helper()->taxonomy->get_taxonomy_selection_options( $this->get_post_type() ),
 			'section' => true,
 		) );
