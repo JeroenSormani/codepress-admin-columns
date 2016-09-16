@@ -9,7 +9,7 @@ class AC_Column_Comment_DateGmt extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-date_gmt';
+		$this->properties['type']  = 'column-date_gmt';
 		$this->properties['label'] = __( 'Date GMT', 'codepress-admin-columns' );
 	}
 
@@ -30,4 +30,5 @@ class AC_Column_Comment_DateGmt extends CPAC_Column {
 
 		return $comment->comment_date_gmt;
 	}
+
 }
