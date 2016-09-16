@@ -9,7 +9,7 @@ class AC_Column_Comment_Status extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-status';
+		$this->properties['type']  = 'column-status';
 		$this->properties['label'] = __( 'Status', 'codepress-admin-columns' );
 	}
 
@@ -28,7 +28,7 @@ class AC_Column_Comment_Status extends CPAC_Column {
 	}
 
 	public function get_raw_value( $id ) {
-		$comment = get_comment( $id );
+		$comment  = get_comment( $id );
 		$statuses = $this->get_statuses();
 
 		return isset( $statuses[ $comment->comment_approved ] ) ? $statuses[ $comment->comment_approved ] : '';
