@@ -11,7 +11,7 @@ class AC_Column_Post_AttachmentCount extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-attachment_count';
+		$this->properties['type']  = 'column-attachment_count';
 		$this->properties['label'] = __( 'Attachment Count', 'codepress-admin-columns' );
 	}
 
