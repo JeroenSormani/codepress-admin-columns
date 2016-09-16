@@ -11,7 +11,7 @@ class AC_Column_Comment_Response extends AC_Column_Default {
 
 		$this->properties['type'] = 'response';
 
-		$this->default_options['width'] = 15;
+		$this->default_options['width']      = 15;
 		$this->default_options['width_unit'] = '%';
 	}
 
