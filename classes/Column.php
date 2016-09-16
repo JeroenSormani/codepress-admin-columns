@@ -70,11 +70,10 @@ abstract class CPAC_Column {
 	 * @param object $storage_model CPAC_Storage_Model
 	 */
 	public function __construct( $storage_model ) {
-
 		$this->storage_model = $storage_model;
 
 		$this->field_settings = new AC_ColumnFieldSettings( $this );
-		$this->format = new AC_ColumnFieldFormat( $this );
+		$this->format         = new AC_ColumnFieldFormat( $this );
 
 		$this->init();
 		$this->after_setup();
@@ -108,7 +107,6 @@ abstract class CPAC_Column {
 	 * @since 2.2
 	 */
 	public function init() {
-
 		// Default properties
 		$this->properties = array(
 			'clone'            => null,    // Unique clone ID
@@ -141,7 +139,6 @@ abstract class CPAC_Column {
 
 	/**
 	 * After Setup
-	 *
 	 */
 	public function after_setup() {
 		$this->properties = (object) $this->properties;
@@ -161,12 +158,11 @@ abstract class CPAC_Column {
 	}
 
 	/**
-	 * @param int $id
+	 * @param  int    $id
 	 *
 	 * @return object
 	 */
 	public function set_clone( $id = null ) {
-
 		if ( $id !== null && $id > 0 ) {
 			$this->set_property( 'name', $this->get_type() . '-' . $id );
 			$this->set_property( 'clone', $id );
@@ -176,7 +172,7 @@ abstract class CPAC_Column {
 	}
 
 	/**
-	 * @param string $name Column name
+	 * @param string $name  Column name
 	 * @param string $label Column label
 	 */
 	public function set_defaults( $name, $label ) {
@@ -203,9 +199,9 @@ abstract class CPAC_Column {
 	/**
 	 * @since 2.0
 	 *
-	 * @param int $id ID
+	 * @param  int    $id ID
 	 *
-	 * @return string Value
+	 * @return string     Value
 	 */
 	public function get_value( $id ) {
 	}
@@ -216,9 +212,9 @@ abstract class CPAC_Column {
 	 *
 	 * @since 2.0.3
 	 *
-	 * @param int $id ID
+	 * @param  int   $id ID
 	 *
-	 * @return mixed Value
+	 * @return mixed     Value
 	 */
 	public function get_raw_value( $id ) {
 	}
@@ -235,9 +231,9 @@ abstract class CPAC_Column {
 	 *
 	 * @since 2.0
 	 *
-	 * @param $options array User submitted column options
+	 * @param        $options array User submitted column options
 	 *
-	 * @return array Options
+	 * @return array          Options
 	 */
 	public function sanitize_options( $options ) {
 		return $options;
@@ -393,10 +389,10 @@ abstract class CPAC_Column {
 	/**
 	 * @since NEWVERSION
 	 *
-	 * @param string $option
-	 * @param string $value
+	 * @param  string $option
+	 * @param  string $value
 	 *
-	 * @return $this CPAC_Column
+	 * @return        $this   CPAC_Column
 	 */
 	public function set_default_option( $option, $value ) {
 		$this->default_options[ $option ] = $value;
@@ -417,10 +413,10 @@ abstract class CPAC_Column {
 	/**
 	 * @since NEWVERSION
 	 *
-	 * @param string $option
-	 * @param string $value
+	 * @param  string $option
+	 * @param  string $value
 	 *
-	 * @return $this CPAC_Column
+	 * @return        $this   CPAC_Column
 	 */
 	public function set_property( $property, $value ) {
 		$this->properties->{$property} = $value;
@@ -433,9 +429,9 @@ abstract class CPAC_Column {
 	 *
 	 * @since 2.3.4
 	 *
-	 * @param string $type Column type. Also work without the 'column-' prefix. Example 'column-meta' or 'meta'.
+	 * @param  string $type Column type. Also work without the 'column-' prefix. Example 'column-meta' or 'meta'.
 	 *
-	 * @return bool Matches column type
+	 * @return bool         Matches column type
 	 */
 	public function is_type( $type ) {
 		return ( $type === $this->get_type() ) || ( 'column-' . $type === $this->get_type() );
@@ -503,7 +499,7 @@ abstract class CPAC_Column {
 		 *
 		 * @since 2.0
 		 *
-		 * @param string $label Column instance label
+		 * @param string      $label           Column instance label
 		 * @param CPAC_Column $column_instance Column class instance
 		 */
 		return apply_filters( 'cac/column/settings_label', stripslashes( str_replace( '[cpac_site_url]', site_url(), $this->get_option( 'label' ) ) ), $this );
@@ -514,18 +510,17 @@ abstract class CPAC_Column {
 	 *
 	 * @since 1.0
 	 *
-	 * @param CPAC_Column $column
+	 * @param  CPAC_Column $column
 	 *
-	 * @return string Sanitized string
+	 * @return string              Sanitized string
 	 */
 	public function get_sanitized_label() {
 		if ( $this->is_default() ) {
 			$string = $this->get_name();
-		}
-		else {
+		} else {
 			$string = $this->get_option( 'label' );
 			$string = strip_tags( $string );
-			$string = preg_replace( "/[^a-zA-Z0-9]+/", "", $string );
+			$string = preg_replace( '/[^a-zA-Z0-9]+/', '', $string );
 			$string = str_replace( 'http://', '', $string );
 			$string = str_replace( 'https://', '', $string );
 		}
@@ -536,9 +531,9 @@ abstract class CPAC_Column {
 	/**
 	 * @since NEWVERSION
 	 *
-	 * @param $id
+	 * @param         $id
 	 *
-	 * @return string Value
+	 * @return string     Value
 	 */
 	public function get_display_value( $id ) {
 		$value = '';
@@ -553,8 +548,8 @@ abstract class CPAC_Column {
 			$value = $this->get_option( 'before' ) . $value . $this->get_option( 'after' );
 		}
 
-		$value = apply_filters( "cac/column/value", $value, $id, $this, $this->get_storage_model_key() );
-		$value = apply_filters( "cac/column/value/" . $this->get_type(), $value, $id, $this, $this->get_storage_model_key() );
+		$value = apply_filters( 'cac/column/value', $value, $id, $this, $this->get_storage_model_key() );
+		$value = apply_filters( 'cac/column/value/' . $this->get_type(), $value, $id, $this, $this->get_storage_model_key() );
 
 		return $value;
 	}
@@ -563,11 +558,10 @@ abstract class CPAC_Column {
 	 * @param string $name
 	 * @param string $label
 	 */
-	public function display_indicator( $name, $label ) { ?>
+	public function display_indicator( $name, $label ) {?>
 		<span class="indicator-<?php echo esc_attr( $name ); ?> <?php echo esc_attr( $this->get_option( $name ) ); ?>" data-indicator-id="<?php $this->field_settings->attr_id( $name ); ?>" title="<?php echo esc_attr( $label ); ?>"></span>
 		<?php
 	}
-
 
 	// Deprecated methods
 
@@ -581,9 +575,9 @@ abstract class CPAC_Column {
 	}
 
 	/**
-	 * @param string $field_name
+	 * @param  string $field_name
 	 *
-	 * @return string Attribute name
+	 * @return string             Attribute name
 	 */
 	public function get_attr_name( $field_name ) {
 		_deprecated_function( __METHOD__, 'AC NEWVERSION', '$this->field_settings->get_attr_name()' );
@@ -592,9 +586,9 @@ abstract class CPAC_Column {
 	}
 
 	/**
-	 * @param string $field_key
+	 * @param  string $field_key
 	 *
-	 * @return string Attribute Name
+	 * @return string            Attribute Name
 	 */
 	public function get_attr_id( $field_name ) {
 		_deprecated_function( __METHOD__, 'AC NEWVERSION', '$this->field_settings->get_attr_id()' );
@@ -609,9 +603,9 @@ abstract class CPAC_Column {
 	}
 
 	/**
-	 * @param string $property
+	 * @param  string $property
 	 *
-	 * @return mixed $value
+	 * @return mixed  $value
 	 */
 	public function set_properties( $property, $value ) {
 		_deprecated_function( __METHOD__, 'AC NEWVERSION', 'CPAC_Column::set_property()' );
@@ -620,9 +614,9 @@ abstract class CPAC_Column {
 	}
 
 	/**
-	 * @param string $option
+	 * @param  string $option
 	 *
-	 * @return mixed $value
+	 * @return mixed  $value
 	 */
 	public function set_options( $option, $value ) {
 		_deprecated_function( __METHOD__, 'AC NEWVERSION', 'CPAC_Column::set_default_option()' );
@@ -633,7 +627,7 @@ abstract class CPAC_Column {
 	/**
 	 * @since NEWVERSION
 	 *
-	 * @param $id
+	 * @param         $id
 	 *
 	 * @return string
 	 */
@@ -646,9 +640,9 @@ abstract class CPAC_Column {
 	/**
 	 * @since 1.3.1
 	 *
-	 * @param string $date
+	 * @param  string $date
 	 *
-	 * @return string Formatted date
+	 * @return string       Formatted date
 	 */
 	public function get_date( $date, $format = '' ) {
 		_deprecated_function( __METHOD__, 'AC NEWVERSION', 'ac_helper()->date->date()' );
@@ -659,9 +653,9 @@ abstract class CPAC_Column {
 	/**
 	 * @since 1.3.1
 	 *
-	 * @param string $date
+	 * @param  string $date
 	 *
-	 * @return string Formatted time
+	 * @return string       Formatted time
 	 */
 	protected function get_time( $date, $format = '' ) {
 		_deprecated_function( __METHOD__, 'AC NEWVERSION', 'ac_helper()->date->time()' );
@@ -674,9 +668,9 @@ abstract class CPAC_Column {
 	 *
 	 * @since 2.0
 	 *
-	 * @param string $date
+	 * @param  string $date
 	 *
-	 * @return string Formatted date
+	 * @return string       Formatted date
 	 */
 	public function get_timestamp( $date ) {
 		_deprecated_function( __METHOD__, 'AC NEWVERSION', 'ac_helper()->date->strtotime()' );
@@ -732,23 +726,23 @@ abstract class CPAC_Column {
 	/**
 	 * @since 1.3.1
 	 *
-	 * @param string $name
-	 * @param string $title
+	 * @param  string $name
+	 * @param  string $title
 	 *
-	 * @return string HTML img element
+	 * @return string        HTML img element
 	 */
 	public function get_asset_image( $name = '', $title = '' ) {
 		_deprecated_function( __METHOD__, 'AC NEWVERSION' );
 
-		return $name ? sprintf( "<img alt='' src='%s' title='%s'/>", cpac()->get_plugin_url() . "assets/images/" . $name, esc_attr( $title ) ) : false;
+		return $name ? sprintf( "<img alt='' src='%s' title='%s'/>", cpac()->get_plugin_url() . 'assets/images/' . $name, esc_attr( $title ) ) : false;
 	}
 
 	/**
 	 * @since 1.0
 	 *
-	 * @param int $post_id Post ID
+	 * @param  int    $post_id Post ID
 	 *
-	 * @return string Post Excerpt.
+	 * @return string          Post Excerpt.
 	 */
 	protected function get_post_excerpt( $post_id, $words ) {
 		_deprecated_function( __METHOD__, 'AC NEWVERSION', 'ac_helper()->post->excerpt()' );
@@ -759,7 +753,7 @@ abstract class CPAC_Column {
 	/**
 	 * @since 1.2.0
 	 *
-	 * @param string $url
+	 * @param  string $url
 	 *
 	 * @return bool
 	 */
@@ -772,9 +766,9 @@ abstract class CPAC_Column {
 	/**
 	 * @since 2.0
 	 *
-	 * @param string $name
+	 * @param  string $name
 	 *
-	 * @return array Image Sizes
+	 * @return array        Image Sizes
 	 */
 	public function get_image_size_by_name( $name ) {
 		_deprecated_function( __METHOD__, 'AC NEWVERSION', 'ac_helper()->image->get_image_sizes_by_name()' );
@@ -794,8 +788,8 @@ abstract class CPAC_Column {
 	}
 
 	/**
-	 * @param $user
-	 * @param bool $format
+	 * @param               $user
+	 * @param  bool         $format
 	 *
 	 * @return false|string
 	 */
@@ -835,9 +829,9 @@ abstract class CPAC_Column {
 	 * @since 2.3
 	 * @deprecated NEWVERSION
 	 *
-	 * @param string $input Input string
+	 * @param  string $input Input string
 	 *
-	 * @return int Number of words
+	 * @return int           Number of words
 	 */
 	public function str_count_words( $input ) {
 		_deprecated_function( __METHOD__, 'NEWVERSION', 'ac_helper()->string->word_count()' );
@@ -871,10 +865,10 @@ abstract class CPAC_Column {
 	/**
 	 * @since 1.0
 	 *
-	 * @param mixed $meta Image files or Image ID's
-	 * @param array $args
+	 * @param  mixed $meta Image files or Image ID's
+	 * @param  array $args
 	 *
-	 * @return array HTML img elements
+	 * @return array       HTML img elements
 	 */
 	public function get_thumbnails( $images, $args = array() ) {
 		_deprecated_function( __METHOD__, 'AC NEWVERSION', 'ac_helper()->image->get_images()' );
@@ -1045,7 +1039,6 @@ abstract class CPAC_Column {
 
 	/**
 	 * @since: 2.2.6
-	 *
 	 */
 	public function get_color_for_display( $color_hex ) {
 		_deprecated_function( __METHOD__, 'AC NEWVERSION', 'ac_helper()->string->get_color_block()' );
