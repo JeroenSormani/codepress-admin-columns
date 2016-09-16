@@ -9,7 +9,7 @@ class AC_Column_User_ID extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-user_id';
+		$this->properties['type']  = 'column-user_id';
 		$this->properties['label'] = __( 'User ID', 'codepress-admin-columns' );
 	}
 
