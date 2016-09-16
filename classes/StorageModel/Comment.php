@@ -1,6 +1,6 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) )  {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -10,13 +10,12 @@ if ( ! defined( 'ABSPATH' ) )  {
 class AC_StorageModel_Comment extends CPAC_Storage_Model {
 
 	public function __construct() {
-
-		$this->key = 'wp-comments';
-		$this->label = __( 'Comments' );
-		$this->singular_label = __( 'Comment' );
-		$this->type = 'comment';
-		$this->meta_type = 'comment';
-		$this->page = 'edit-comments';
+		$this->key             = 'wp-comments';
+		$this->label           = __( 'Comments' );
+		$this->singular_label  = __( 'Comment' );
+		$this->type            = 'comment';
+		$this->meta_type       = 'comment';
+		$this->page            = 'edit-comments';
 		$this->table_classname = 'WP_Comments_List_Table';
 
 		parent::__construct();
