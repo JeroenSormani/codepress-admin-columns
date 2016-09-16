@@ -9,7 +9,7 @@ class AC_Column_Media_Height extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-height';
+		$this->properties['type']  = 'column-height';
 		$this->properties['label'] = __( 'Height', 'codepress-admin-columns' );
 	}
 
