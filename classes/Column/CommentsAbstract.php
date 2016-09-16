@@ -9,7 +9,7 @@ abstract class AC_Column_CommentsAbstract extends AC_Column_Default {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'comments';
+		$this->properties['type']       = 'comments';
 		$this->properties['hide_label'] = true;
 	}
 
