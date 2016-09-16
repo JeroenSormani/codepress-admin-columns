@@ -9,7 +9,7 @@ class AC_Column_Link_Rss extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-rss';
+		$this->properties['type']  = 'column-rss';
 		$this->properties['label'] = __( 'Rss', 'codepress-admin-columns' );
 	}
 
