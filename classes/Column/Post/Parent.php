@@ -9,7 +9,7 @@ class AC_Column_Post_Parent extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-parent';
+		$this->properties['type']  = 'column-parent';
 		$this->properties['label'] = __( 'Parent', 'codepress-admin-columns' );
 	}
 
@@ -19,9 +19,9 @@ class AC_Column_Post_Parent extends CPAC_Column {
 		}
 
 		$title = ac_helper()->post->get_post_title( $parent_id );
-		$link = get_edit_post_link( $parent_id );
+		$link  = get_edit_post_link( $parent_id );
 
-		return $link ? "<a href='" . esc_attr( $link ) . "'>" . $title . "</a>" : $title;
+		return $link ? "<a href='" . esc_attr( $link ) . "'>" . $title . '</a>' : $title;
 	}
 
 	public function get_raw_value( $post_id ) {
