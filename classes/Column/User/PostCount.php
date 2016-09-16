@@ -9,7 +9,7 @@ class AC_Column_User_PostCount extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-user_postcount';
+		$this->properties['type']  = 'column-user_postcount';
 		$this->properties['label'] = __( 'Post Count', 'codepress-admin-columns' );
 	}
 
@@ -38,10 +38,9 @@ class AC_Column_User_PostCount extends CPAC_Column {
 	}
 
 	function display_settings() {
-
 		$post_types = array();
 		foreach ( (array) cpac()->get_post_types() as $type ) {
-			$obj = get_post_type_object( $type );
+			$obj                 = get_post_type_object( $type );
 			$post_types[ $type ] = $obj->labels->name;
 		}
 
