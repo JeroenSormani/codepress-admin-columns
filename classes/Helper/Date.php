@@ -29,8 +29,7 @@ class AC_Helper_Date {
 			if ( 8 === $length && ( strpos( $date, '20' ) === 0 || strpos( $date, '19' ) === 0 ) ) {
 				$date = strtotime( $date );
 			}
-		}
-		else {
+		} else {
 			$date = strtotime( $date );
 		}
 
@@ -40,9 +39,9 @@ class AC_Helper_Date {
 	/**
 	 * @since 1.3.1
 	 *
-	 * @param string $date
+	 * @param  string $date
 	 *
-	 * @return string Formatted date
+	 * @return string       Formatted date
 	 */
 	public function date( $date, $format = '' ) {
 		$timestamp = ac_helper()->date->strtotime( $date );
@@ -63,9 +62,9 @@ class AC_Helper_Date {
 	/**
 	 * @since 1.3.1
 	 *
-	 * @param string $date
+	 * @param  string $date
 	 *
-	 * @return string Formatted time
+	 * @return string       Formatted time
 	 */
 	public function time( $date, $format = '' ) {
 		$timestamp = ac_helper()->date->strtotime( $date );
