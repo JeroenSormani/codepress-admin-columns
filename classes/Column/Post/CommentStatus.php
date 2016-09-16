@@ -12,7 +12,7 @@ class AC_Column_Post_CommentStatus extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-comment_status';
+		$this->properties['type']  = 'column-comment_status';
 		$this->properties['label'] = __( 'Comment status', 'codepress-admin-columns' );
 	}
 
