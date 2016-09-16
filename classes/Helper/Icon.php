@@ -50,9 +50,9 @@ class AC_Helper_Icon {
 	/**
 	 * @since NEWVERSION
 	 *
-	 * @param bool $display
+	 * @param  bool   $display
 	 *
-	 * @return string HTML Dashicon
+	 * @return string          HTML Dashicon
 	 */
 	public function yes_or_no( $is_true, $tooltip = '' ) {
 		return $is_true ? self::yes( $tooltip ) : self::no( $tooltip );
