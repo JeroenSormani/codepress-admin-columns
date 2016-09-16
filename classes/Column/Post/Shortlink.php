@@ -9,7 +9,7 @@ class AC_Column_Post_Shortlink extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-shortlink';
+		$this->properties['type']  = 'column-shortlink';
 		$this->properties['label'] = __( 'Shortlink', 'codepress-admin-columns' );
 	}
 
