@@ -9,7 +9,7 @@ class AC_Column_User_Registered extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-user_registered';
+		$this->properties['type']  = 'column-user_registered';
 		$this->properties['label'] = __( 'Registered', 'codepress-admin-columns' );
 	}
 

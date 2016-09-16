@@ -32,7 +32,7 @@ class AC_Helper_FormField {
 					<?php foreach ( $args->grouped_options as $group ) : ?>
 						<optgroup label="<?php echo esc_attr( $group['title'] ); ?>">
 							<?php foreach ( $group['options'] as $key => $label ) : ?>
-								<option value="<?php echo $key ?>"<?php selected( $key, $current ) ?>><?php echo esc_html( $label ); ?></option>
+								<option value="<?php echo $key; ?>"<?php selected( $key, $current ); ?>><?php echo esc_html( $label ); ?></option>
 							<?php endforeach; ?>
 						</optgroup>
 					<?php endforeach; ?>
@@ -60,7 +60,7 @@ class AC_Helper_FormField {
 			'class'     => '',
 			'vertical'  => false // display radio buttons vertical
 		);
-		$args = (object) wp_parse_args( (array) $args, $defaults );
+		$args     = (object) wp_parse_args( (array) $args, $defaults );
 
 		$current = $args->current ? $args->current : $args->default;
 
@@ -127,8 +127,8 @@ class AC_Helper_FormField {
 			'class' => '',
 		) );
 		?>
-		<span class="<?php echo esc_attr( $args->class ); ?>"><?php echo $args['text'] ?></span>
+		<span class="<?php echo esc_attr( $args->class ); ?>"><?php echo $args['text']; ?></span>
 		<?php
-
 	}
+
 }

@@ -9,7 +9,7 @@ class AC_Column_Link_Target extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-target';
+		$this->properties['type']  = 'column-target';
 		$this->properties['label'] = __( 'Target', 'codepress-admin-columns' );
 	}
 

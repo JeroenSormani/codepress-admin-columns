@@ -3,7 +3,7 @@ defined( 'ABSPATH' ) or die();
 
 class AC_Admin_Settings {
 
-	public function display() { ?>
+	public function display() {?>
 		<table class="form-table cpac-form-table settings">
 			<tbody>
 			<tr class="general">
@@ -41,7 +41,7 @@ class AC_Admin_Settings {
 
 				foreach ( $groups as $id => $group ) {
 
-					$title = isset( $group['title'] ) ? $group['title'] : '';
+					$title       = isset( $group['title'] ) ? $group['title'] : '';
 					$description = isset( $group['description'] ) ? $group['description'] : '';
 
 					?>
@@ -55,7 +55,7 @@ class AC_Admin_Settings {
 							<?php
 
 							/** Use this Hook to add additional fields to the group */
-							do_action( "cac/settings/groups/row=" . $id );
+							do_action( 'cac/settings/groups/row=' . $id );
 
 							?>
 						</td>

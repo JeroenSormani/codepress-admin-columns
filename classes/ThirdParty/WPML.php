@@ -7,7 +7,6 @@ defined( 'ABSPATH' ) or die();
 class AC_ThirdParty_WPML {
 
 	function __construct() {
-
 		// display correct flags on the overview screens
 		add_action( 'cac/loaded', array( $this, 'replace_flags' ) );
 
@@ -33,7 +32,7 @@ class AC_ThirdParty_WPML {
 		if ( ! isset( $settings['custom_posts_sync_option'] ) ) {
 			return;
 		}
-		$post_types = (array) $settings['custom_posts_sync_option'];
+		$post_types         = (array) $settings['custom_posts_sync_option'];
 		$post_types['post'] = 1;
 		$post_types['page'] = 1;
 		foreach ( $post_types as $post_type => $value ) {
@@ -45,7 +44,6 @@ class AC_ThirdParty_WPML {
 
 	// Create translatable column labels
 	public function register_column_labels() {
-
 		// don't load this unless required by WPML
 		if ( ! isset( $_GET['page'] ) || 'wpml-string-translation/menu/string-translation.php' !== $_GET['page'] ) {
 			return;
@@ -59,16 +57,16 @@ class AC_ThirdParty_WPML {
 	}
 
 	/**
-	 * @param string $label
-	 * @param string $column_name
-	 * @param array $column_options
-	 * @param CPAC_Storage_Model $storage_model
+	 * @param  string             $label
+	 * @param  string             $column_name
+	 * @param  array              $column_options
+	 * @param  CPAC_Storage_Model $storage_model
 	 *
 	 * @return string
 	 */
 	public function register_translated_label( $label, $column_name, $column_options, $storage_model ) {
 		if ( function_exists( 'icl_t' ) ) {
-			$name = $storage_model->get_key() . '_' . $column_name;
+			$name  = $storage_model->get_key() . '_' . $column_name;
 			$label = icl_t( 'Admin Columns', $name, $label );
 		}
 

@@ -9,7 +9,7 @@ class AC_Column_Media_MimeType extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-mime_type';
+		$this->properties['type']  = 'column-mime_type';
 		$this->properties['label'] = __( 'Mime type', 'codepress-admin-columns' );
 	}
 

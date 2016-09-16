@@ -12,12 +12,11 @@ class AC_Column_Post_AuthorName extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-author_name';
+		$this->properties['type']  = 'column-author_name';
 		$this->properties['label'] = __( 'Display Author As', 'codepress-admin-columns' );
 	}
 
 	public function get_value( $post_id ) {
-
 		$author = $this->get_post_author( $post_id );
 
 		// User name
@@ -40,7 +39,7 @@ class AC_Column_Post_AuthorName extends CPAC_Column {
 				break;
 			case 'email_user' :
 				$email = get_the_author_meta( 'email', $author );
-				$link = $email ? 'mailto:' . $email : false;
+				$link  = $email ? 'mailto:' . $email : false;
 				break;
 		}
 

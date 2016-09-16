@@ -9,7 +9,7 @@ class AC_Column_Media_Dimensions extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-dimensions';
+		$this->properties['type']  = 'column-dimensions';
 		$this->properties['label'] = __( 'Dimensions', 'codepress-admin-columns' );
 	}
 
@@ -17,7 +17,7 @@ class AC_Column_Media_Dimensions extends CPAC_Column {
 		$meta = $this->get_raw_value( $id );
 
 		$height = ! empty( $meta['height'] ) ? $meta['height'] : 0;
-		$width = ! empty( $meta['width'] ) ? $meta['width'] : 0;
+		$width  = ! empty( $meta['width'] ) ? $meta['width'] : 0;
 
 		return $height * $width;
 	}

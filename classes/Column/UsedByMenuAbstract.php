@@ -12,7 +12,7 @@ abstract class AC_Column_UsedByMenuAbstract extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-used_by_menu';
+		$this->properties['type']  = 'column-used_by_menu';
 		$this->properties['label'] = __( 'Used by Menu', 'codepress-admin-columns' );
 
 		$this->default_options['link_to_menu'] = false;
@@ -41,12 +41,12 @@ abstract class AC_Column_UsedByMenuAbstract extends CPAC_Column {
 		return implode( ', ', $menus );
 	}
 
-	function get_formatted_value( $object_id ){
+	function get_formatted_value( $object_id ) {
 		$menus = array();
 
 		if ( $menu_ids = $this->get_raw_value( $object_id ) ) {
 			foreach ( $menu_ids as $menu_id ) {
-				$term = get_term_by( 'id', $menu_id, 'nav_menu' );
+				$term    = get_term_by( 'id', $menu_id, 'nav_menu' );
 				$menus[] = $term->name;
 			}
 		}
@@ -61,11 +61,10 @@ abstract class AC_Column_UsedByMenuAbstract extends CPAC_Column {
 	 */
 	function get_meta_type() {
 		$object_type = false;
-		$model = $this->get_storage_model();
+		$model       = $this->get_storage_model();
 		if ( isset( $model->taxonomy ) ) {
 			$object_type = $model->taxonomy;
-		}
-		elseif ( $post_type = $this->get_post_type() ) {
+		} elseif ( $post_type = $this->get_post_type() ) {
 			$object_type = $post_type;
 		}
 

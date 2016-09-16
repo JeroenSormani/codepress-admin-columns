@@ -30,4 +30,5 @@ class AC_ThirdParty_WPMLColumn {
 
 		return $columns;
 	}
+
 }

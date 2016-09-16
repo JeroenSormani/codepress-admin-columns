@@ -9,7 +9,7 @@ class AC_Column_User_DisplayName extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-display_name';
+		$this->properties['type']  = 'column-display_name';
 		$this->properties['label'] = __( 'Display name', 'codepress-admin-columns' );
 	}
 

@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) or die();
 class AC_Admin_Addons {
 
 	public function display() {
-		$addon_groups = cpac()->addons()->get_addon_groups();
+		$addon_groups   = cpac()->addons()->get_addon_groups();
 		$grouped_addons = cpac()->addons()->get_available_addons( true );
 		?>
 		<?php foreach ( $grouped_addons as $group_name => $addons ) : ?>

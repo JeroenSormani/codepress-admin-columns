@@ -6,7 +6,7 @@ class AC_Column_User_RichEditing extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-rich_editing';
+		$this->properties['type']  = 'column-rich_editing';
 		$this->properties['label'] = __( 'Visual Editor', 'codepress-admin-columns' );
 	}
 

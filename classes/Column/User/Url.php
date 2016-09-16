@@ -9,7 +9,7 @@ class AC_Column_User_Url extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-user_url';
+		$this->properties['type']  = 'column-user_url';
 		$this->properties['label'] = __( 'Url', 'codepress-admin-columns' );
 	}
 

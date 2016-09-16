@@ -9,7 +9,7 @@ class AC_Column_Post_TitleRaw extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-title_raw';
+		$this->properties['type']  = 'column-title_raw';
 		$this->properties['label'] = __( 'Title without actions', 'codepress-admin-columns' );
 	}
 

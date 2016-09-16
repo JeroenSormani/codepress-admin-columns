@@ -9,7 +9,7 @@ class AC_Column_Post_Roles extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-roles';
+		$this->properties['type']  = 'column-roles';
 		$this->properties['label'] = __( 'Roles', 'codepress-admin-columns' );
 	}
 

@@ -161,7 +161,7 @@ abstract class CPAC_Storage_Model {
 	 * @since NEWVERSION
 	 */
 	public function init_column_headings() {
-		add_filter( "manage_" . $this->get_screen_id() . "_columns", array( $this, 'add_headings' ), 200 ); // Filter is located in get_column_headers()
+		add_filter( 'manage_' . $this->get_screen_id() . '_columns', array( $this, 'add_headings' ), 200 ); // Filter is located in get_column_headers()
 	}
 
 	/**
@@ -239,7 +239,6 @@ abstract class CPAC_Storage_Model {
 	 * @since NEWVERSION
 	 */
 	private function get_default_headings() {
-
 		if ( null === $this->default_columns ) {
 
 			// Get default column that have been set on the listings screen
@@ -247,9 +246,9 @@ abstract class CPAC_Storage_Model {
 
 			// As a fallback we can use the table headings. this is not reliable, because most 3rd party column will not be loaded at this point.
 			if ( empty( $default_columns ) ) {
-				$default_columns = apply_filters( "cac/default_columns", $this->get_default_columns(), $this );
-				$default_columns = apply_filters( "cac/default_columns/type=" . $this->type, $default_columns, $this );
-				$default_columns = apply_filters( "cac/default_columns/storage_key=" . $this->key, $default_columns, $this );
+				$default_columns = apply_filters( 'cac/default_columns', $this->get_default_columns(), $this );
+				$default_columns = apply_filters( 'cac/default_columns/type=' . $this->type, $default_columns, $this );
+				$default_columns = apply_filters( 'cac/default_columns/storage_key=' . $this->key, $default_columns, $this );
 			}
 
 			if ( isset( $default_columns['cb'] ) ) {
@@ -302,7 +301,6 @@ abstract class CPAC_Storage_Model {
 	 * @since 2.0.1
 	 */
 	public function set_columns_filepath() {
-
 		$dir = cpac()->get_plugin_dir();
 
 		require_once $dir . 'classes/Column.php';
@@ -338,7 +336,7 @@ abstract class CPAC_Storage_Model {
 		 *
 		 * @since 2.0
 		 *
-		 * @param array $columns Available custom columns ([class_name] => [class file path])
+		 * @param array              $columns       Available custom columns ([class_name] => [class file path])
 		 * @param CPAC_Storage_Model $storage_model Storage model class instance
 		 */
 		$columns = apply_filters( 'cac/columns/custom', $columns, $this );
@@ -365,13 +363,12 @@ abstract class CPAC_Storage_Model {
 	/**
 	 * @since NEWVERSION
 	 *
-	 * @param string $column_type
-	 * @param false|int $clone clone ID
+	 * @param  string            $column_type
+	 * @param  false|int         $clone       clone ID
 	 *
-	 * @return CPAC_Column|false Column
+	 * @return CPAC_Column|false              Column
 	 */
 	public function create_column_instance( $column_type, $clone = false ) {
-
 		$classnames = $this->get_column_classnames();
 
 		// Non defined columns will be from a plugin
@@ -429,7 +426,7 @@ abstract class CPAC_Storage_Model {
 			unset( $class_names['column-default'] );
 
 			$default_types = array_keys( (array) $this->get_default_headings() );
-			$custom_types = array_keys( $class_names );
+			$custom_types  = array_keys( $class_names );
 
 			$column_types = array_merge( $default_types, $custom_types );
 
@@ -450,8 +447,8 @@ abstract class CPAC_Storage_Model {
 	 */
 	public function flush_columns() {
 		$this->stored_columns = array();
-		$this->column_types = array();
-		$this->columns = array();
+		$this->column_types   = array();
+		$this->columns        = array();
 	}
 
 	/**
@@ -499,11 +496,11 @@ abstract class CPAC_Storage_Model {
 		}
 
 		// Deprecated since NEWVERSION
-		do_action( "cac/columns", $this->columns, $this );
+		do_action( 'cac/columns', $this->columns, $this );
 		do_action( "cac/columns/storage_key={$this->key}", $this->columns, $this );
 
 		// Hook
-		do_action( "ac/columns", $this );
+		do_action( 'ac/columns', $this );
 	}
 
 	/**
@@ -519,7 +516,6 @@ abstract class CPAC_Storage_Model {
 	/**
 	 * initialize callback for managing the headers and values for columns
 	 * @since 2.4.10
-	 *
 	 */
 	public function init_manage_columns() {
 	}
@@ -575,20 +571,18 @@ abstract class CPAC_Storage_Model {
 	public function get_meta_keys() {
 		if ( $cache = wp_cache_get( $this->key, 'cac_columns' ) ) {
 			$keys = $cache;
-		}
-		else {
+		} else {
 			$keys = $this->get_meta();
 			wp_cache_add( $this->key, $keys, 'cac_columns', 10 ); // 10 sec.
 		}
 
 		if ( is_wp_error( $keys ) || empty( $keys ) ) {
 			$keys = false;
-		}
-		else {
+		} else {
 			foreach ( $keys as $k => $key ) {
 
 				// give hidden keys a prefix
-				$keys[ $k ] = "_" == substr( $key[0], 0, 1 ) ? 'cpachidden' . $key[0] : $key[0];
+				$keys[ $k ] = '_' == substr( $key[0], 0, 1 ) ? 'cpachidden' . $key[0] : $key[0];
 			}
 		}
 
@@ -598,7 +592,7 @@ abstract class CPAC_Storage_Model {
 		 *
 		 * @since 2.0
 		 *
-		 * @param array $keys Available custom field keys
+		 * @param array              $keys          Available custom field keys
 		 * @param CPAC_Storage_Model $storage_model Storage model class instance
 		 */
 		$keys = apply_filters( 'cac/storage_model/meta_keys', $keys, $this );
@@ -615,9 +609,9 @@ abstract class CPAC_Storage_Model {
 	/**
 	 * @since 2.0
 	 *
-	 * @param array $fields Custom fields.
+	 * @param  array       $fields Custom fields.
 	 *
-	 * @return array|false Custom fields.
+	 * @return array|false         Custom fields.
 	 */
 	protected function add_hidden_meta( $fields ) {
 		if ( ! $fields ) {
@@ -630,10 +624,10 @@ abstract class CPAC_Storage_Model {
 		foreach ( $fields as $field ) {
 
 			// give hidden fields a prefix for identification
-			if ( "_" == substr( $field[0], 0, 1 ) ) {
+			if ( '_' == substr( $field[0], 0, 1 ) ) {
 				$combined_fields[] = 'cpachidden' . $field[0];
 			} // non hidden fields are saved as is
-			elseif ( "_" != substr( $field[0], 0, 1 ) ) {
+			elseif ( '_' != substr( $field[0], 0, 1 ) ) {
 				$combined_fields[] = $field[0];
 			}
 		}
@@ -675,7 +669,6 @@ abstract class CPAC_Storage_Model {
 	}
 
 	public function init_settings_layout() {
-
 		// try admin preference..
 		$layout_id = $this->get_user_layout_preference();
 
@@ -699,7 +692,7 @@ abstract class CPAC_Storage_Model {
 			// try user preference..
 			foreach ( $layouts_current_user as $_layout ) {
 				if ( $_layout->id == $layout_preference ) {
-					$layout_id = $_layout->id;
+					$layout_id    = $_layout->id;
 					$layout_found = true;
 					break;
 				}
@@ -708,12 +701,12 @@ abstract class CPAC_Storage_Model {
 			// when no longer available use the first user layout
 			if ( ! $layout_found ) {
 				$_layouts_current_user = array_values( $layouts_current_user );
-				$layout_id = $_layouts_current_user[0]->id;
+				$layout_id             = $_layouts_current_user[0]->id;
 			}
 		}
 
 		// User doesn't have eligible layouts.. but the current (null) layout does exists, then the WP default columns are loaded
-		else if ( $this->get_layout_by_id( $layout_id ) ) {
+		elseif ( $this->get_layout_by_id( $layout_id ) ) {
 			$layout_id = '_wp_default_'; // _wp_default_ does not exists therefor will load WP default
 		}
 
@@ -753,7 +746,7 @@ abstract class CPAC_Storage_Model {
 					continue;
 				}
 
-				$layout = (object) maybe_unserialize( $result->option_value );
+				$layout                 = (object) maybe_unserialize( $result->option_value );
 				$layouts[ $layout->id ] = $layout;
 			}
 		}
@@ -808,7 +801,7 @@ abstract class CPAC_Storage_Model {
 		$user_layouts = array();
 
 		$current_user = get_current_user_id();
-		$layouts = $this->get_layouts();
+		$layouts      = $this->get_layouts();
 		foreach ( $layouts as $k => $layout ) {
 
 			// Roles
@@ -856,7 +849,6 @@ abstract class CPAC_Storage_Model {
 	 * @return stdClass|WP_Error Layout object
 	 */
 	public function save_layout( $id, $args ) {
-
 		if ( empty( $args['name'] ) ) {
 			return new WP_Error( 'empty-name' );
 		}
@@ -872,13 +864,12 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
-	 * @param $args array
-	 * @param bool $is_default
+	 * @param           $args       array
+	 * @param  bool     $is_default
 	 *
 	 * @return null|int
 	 */
 	public function create_layout( $args, $is_default = false ) {
-
 		// The default layout has an empty ID, that way it stays compatible when layouts is disabled.
 		$id = $is_default ? null : uniqid();
 		$this->save_layout( $id, $args );
@@ -931,7 +922,6 @@ abstract class CPAC_Storage_Model {
 	 * @param array $default_columns Default columns heading names.
 	 */
 	public function store( $columns ) {
-
 		if ( ! $columns ) {
 			return new WP_Error( 'no-settings', __( 'No columns settings available.', 'codepress-admin-columns' ) );
 		}
@@ -975,7 +965,7 @@ abstract class CPAC_Storage_Model {
 		$this->flush_columns();
 
 		if ( ! $result ) {
-			return new WP_Error( 'same-settings', sprintf( __( 'You are trying to store the same settings for %s.', 'codepress-admin-columns' ), "<strong>" . $this->get_label_or_layout_name() . "</strong>" ) );
+			return new WP_Error( 'same-settings', sprintf( __( 'You are trying to store the same settings for %s.', 'codepress-admin-columns' ), '<strong>' . $this->get_label_or_layout_name() . '</strong>' ) );
 		}
 
 		/**
@@ -984,7 +974,7 @@ abstract class CPAC_Storage_Model {
 		 *
 		 * @since 2.2.9
 		 *
-		 * @param array $columns List of columns ([column id] => (array) [column properties])
+		 * @param array              $columns                List of columns ([column id] => (array) [column properties])
 		 * @param CPAC_Storage_Model $storage_model_instance Storage model instance
 		 */
 		do_action( 'cac/storage_model/columns_stored', $columns, $this );
@@ -995,20 +985,20 @@ abstract class CPAC_Storage_Model {
 	/**
 	 * @since 1.0
 	 *
-	 * @param string $key
+	 * @param  string $key
 	 *
-	 * @return array Column options
+	 * @return array       Column options
 	 */
 	public function get_default_stored_columns() {
-		return get_option( $this->get_storage_key() . "__default", array() );
+		return get_option( $this->get_storage_key() . '__default', array() );
 	}
 
 	public function delete_default_stored_columns() {
-		delete_option( $this->get_storage_key() . "__default" );
+		delete_option( $this->get_storage_key() . '__default' );
 	}
 
 	private function store_default_columns( $columns ) {
-		return update_option( $this->get_storage_key() . "__default", $columns );
+		return update_option( $this->get_storage_key() . '__default', $columns );
 	}
 
 	private function get_storage_key() {
@@ -1119,7 +1109,7 @@ abstract class CPAC_Storage_Model {
 		}
 
 		$this->column_types = null; // flush types, in case a column was deactivated
-		$types = array_keys( $this->get_column_types() );
+		$types              = array_keys( $this->get_column_types() );
 
 		// add active stored headings
 		foreach ( $stored_columns as $column_name => $options ) {
@@ -1137,9 +1127,9 @@ abstract class CPAC_Storage_Model {
 			 *
 			 * @since 2.0
 			 *
-			 * @param string $label Label
-			 * @param string $column_name Column name
-			 * @param array $options Column options
+			 * @param string             $label         Label
+			 * @param string             $column_name   Column name
+			 * @param array              $options       Column options
 			 * @param CPAC_Storage_Model $storage_model Storage model class instance
 			 */
 			$label = apply_filters( 'cac/headings/label', $label, $column_name, $options, $this );
@@ -1229,7 +1219,7 @@ abstract class CPAC_Storage_Model {
 	 * @since NEWVERSION
 	 *
 	 * @param CPAC_Column $column
-	 * @param array $options
+	 * @param array       $options
 	 */
 	public function populate_column_options( CPAC_Column $column, $options ) {
 		// Set options
@@ -1248,15 +1238,15 @@ abstract class CPAC_Storage_Model {
 	/**
 	 * Adds columns classnames from specified directory
 	 *
-	 * @param string $columns_dir Columns directory
-	 * @param string $prefix Autoload prefix
-	 * @param array $columns Columns [ class_name => autoload ]
+	 * @param  string $columns_dir Columns directory
+	 * @param  string $prefix      Autoload prefix
+	 * @param  array  $columns     Columns [ class_name => autoload ]
 	 *
 	 * @return array
 	 */
 	public function add_autoload_columns( $columns_dir, $prefix, $columns = array() ) {
 		$autoloader = AC_Autoloader::instance();
-		$_columns = $autoloader->get_class_names_from_dir( $columns_dir, $prefix );
+		$_columns   = $autoloader->get_class_names_from_dir( $columns_dir, $prefix );
 
 		// set to autoload (true)
 		return array_merge( $columns, array_fill_keys( $_columns, true ) );

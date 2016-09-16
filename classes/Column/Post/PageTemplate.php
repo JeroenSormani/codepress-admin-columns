@@ -9,7 +9,7 @@ class AC_Column_Post_PageTemplate extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-page_template';
+		$this->properties['type']  = 'column-page_template';
 		$this->properties['label'] = __( 'Page Template', 'codepress-admin-columns' );
 	}
 

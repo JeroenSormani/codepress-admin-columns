@@ -11,7 +11,7 @@ class AC_Column_Post_Categories extends AC_Column_Default {
 
 		$this->properties['type'] = 'categories';
 
-		$this->default_options['width'] = 15;
+		$this->default_options['width']      = 15;
 		$this->default_options['width_unit'] = '%';
 	}
 

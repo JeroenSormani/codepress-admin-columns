@@ -9,7 +9,7 @@ class AC_Column_User_Nickname extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-nickname';
+		$this->properties['type']  = 'column-nickname';
 		$this->properties['label'] = __( 'Nickname', 'codepress-admin-columns' );
 	}
 

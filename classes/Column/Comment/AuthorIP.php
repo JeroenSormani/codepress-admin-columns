@@ -6,7 +6,7 @@ class AC_Column_Comment_AuthorIP extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-author_ip';
+		$this->properties['type']  = 'column-author_ip';
 		$this->properties['label'] = __( 'Author IP', 'codepress-admin-columns' );
 	}
 

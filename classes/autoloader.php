@@ -30,11 +30,11 @@ class AC_Autoloader {
 	 * Register a prefix that should autoload
 	 *
 	 * @param $prefix string Unique prefix to this set of classes
-	 * @param $path string Path to directory where classes are stored
+	 * @param $path   string Path to directory where classes are stored
 	 */
 	public function register_prefix( $prefix, $path ) {
 		$prefix = rtrim( $prefix, '_' ) . '_';
-		$path = trailingslashit( $path );
+		$path   = trailingslashit( $path );
 
 		$this->prefixes[ $prefix ] = $path;
 
@@ -62,7 +62,7 @@ class AC_Autoloader {
 	}
 
 	/**
-	 * @param string $prefix
+	 * @param  string       $prefix
 	 *
 	 * @return false|string
 	 */
@@ -73,14 +73,13 @@ class AC_Autoloader {
 	/**
 	 * Get list of all class names from a directory
 	 *
-	 * @param string $dir
-	 * @param string $prefix
+	 * @param  string      $dir
+	 * @param  string      $prefix
 	 *
-	 * @return array|false Class names
+	 * @return array|false         Class names
 	 */
 	public function get_class_names_from_dir( $dir, $prefix ) {
-
-		$path = trailingslashit( $dir );
+		$path        = trailingslashit( $dir );
 		$classes_dir = $this->get_path_by_prefix( $prefix );
 
 		// skip if directory is not auto loaded

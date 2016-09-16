@@ -122,7 +122,6 @@ class CPAC {
 	 * @since 1.0
 	 */
 	function __construct() {
-
 		// Backwards compatibility
 		define( 'CPAC_VERSION', $this->get_version() );
 		define( 'CPAC_URL', $this->get_plugin_url() );
@@ -155,9 +154,9 @@ class CPAC {
 
 		// Includes
 		$this->_settings = new AC_Admin();
-		$this->_addons = new AC_Addons();
-		$this->_upgrade = new AC_Upgrade();
-		$this->helper = new AC_Helper();
+		$this->_addons   = new AC_Addons();
+		$this->_upgrade  = new AC_Upgrade();
+		$this->helper    = new AC_Helper();
 
 		new AC_Notice_Review();
 
@@ -172,7 +171,7 @@ class CPAC {
 	 *
 	 * @since NEWVERSION
 	 *
-	 * @param string $key
+	 * @param  string $key
 	 *
 	 * @return mixed
 	 */
@@ -234,7 +233,6 @@ class CPAC {
 	 * @since 2.2
 	 */
 	public function after_setup() {
-
 		/**
 		 * Fires when Admin Columns is fully loaded
 		 * Use this for setting up addon functionality
@@ -270,7 +268,6 @@ class CPAC {
 	 * @since 2.2.4
 	 */
 	public function scripts() {
-
 		// Listings screen
 		if ( $current_storage_model = $this->get_current_storage_model() ) {
 
@@ -299,7 +296,7 @@ class CPAC {
 		}
 
 		// Settings screen
-		else if ( cac_is_setting_screen() ) {
+		elseif ( cac_is_setting_screen() ) {
 			do_action( 'ac/enqueue_settings_scripts' );
 		}
 	}
@@ -362,24 +359,24 @@ class CPAC {
 
 			// Create a storage model per post type
 			foreach ( $this->get_post_types() as $post_type ) {
-				$storage_model = new AC_StorageModel_Post( $post_type );
+				$storage_model                         = new AC_StorageModel_Post( $post_type );
 				$storage_models[ $storage_model->key ] = $storage_model;
 			}
 
 			// Create other storage models
-			$storage_model = new AC_StorageModel_User();
+			$storage_model                         = new AC_StorageModel_User();
 			$storage_models[ $storage_model->key ] = $storage_model;
 
-			$storage_model = new AC_StorageModel_Media();
+			$storage_model                         = new AC_StorageModel_Media();
 			$storage_models[ $storage_model->key ] = $storage_model;
 
-			$storage_model = new AC_StorageModel_Comment();
+			$storage_model                         = new AC_StorageModel_Comment();
 			$storage_models[ $storage_model->key ] = $storage_model;
 
 			if ( apply_filters( 'pre_option_link_manager_enabled', false ) ) { // as of 3.5 link manager is removed
 				include_once $classes_dir . 'storage_model/link.php';
 
-				$storage_model = new AC_StorageModel_Link();
+				$storage_model                         = new AC_StorageModel_Link();
 				$storage_models[ $storage_model->key ] = $storage_model;
 			}
 
@@ -389,8 +386,8 @@ class CPAC {
 			 *
 			 * @since 2.0
 			 *
-			 * @param array $storage_models List of storage model class instances ( [key] => [CPAC_Storage_Model object], where [key] is the storage key, such as "user", "post" or "my_custom_post_type")
-			 * @param object $this CPAC
+			 * @param array  $storage_models List of storage model class instances ( [key] => [CPAC_Storage_Model object], where [key] is the storage key, such as "user", "post" or "my_custom_post_type")
+			 * @param object $this           CPAC
 			 */
 			$this->storage_models = apply_filters( 'cac/storage_models', $storage_models, $this );
 		}
@@ -403,9 +400,9 @@ class CPAC {
 	 *
 	 * @since 2.0
 	 *
-	 * @param string $key Storage model key (e.g. post, page, wp-users)
+	 * @param  string                  $key Storage model key (e.g. post, page, wp-users)
 	 *
-	 * @return bool|CPAC_Storage_Model Storage Model object (or false, on failure)
+	 * @return bool|CPAC_Storage_Model      Storage Model object (or false, on failure)
 	 */
 	public function get_storage_model( $key ) {
 		$models = $this->get_storage_models();
@@ -419,7 +416,6 @@ class CPAC {
 	 * @since 2.4.9
 	 */
 	public function load_listings_headings_and_values() {
-
 		// Listings screen
 		$storage_model = $this->get_current_storage_model();
 
@@ -440,9 +436,9 @@ class CPAC {
 	 *
 	 * @since 2.5.4
 	 *
-	 * @param $storage_key CPAC_Storage_Model->key
-	 * @param $layout_id CPAC_Storage_Model->layout
-	 * @param $column_name CPAC_Column->name
+	 * @param              $storage_key CPAC_Storage_Model->key
+	 * @param              $layout_id   CPAC_Storage_Model->layout
+	 * @param              $column_name CPAC_Column->name
 	 *
 	 * @return CPAC_Column
 	 */
@@ -544,7 +540,7 @@ class CPAC {
 			return $links;
 		}
 
-		array_unshift( $links, '<a href="' . esc_url( admin_url( "options-general.php?page=codepress-admin-columns" ) ) . '">' . __( 'Settings' ) . '</a>' );
+		array_unshift( $links, '<a href="' . esc_url( admin_url( 'options-general.php?page=codepress-admin-columns' ) ) . '">' . __( 'Settings' ) . '</a>' );
 
 		return $links;
 	}
@@ -554,7 +550,7 @@ class CPAC {
 	 *
 	 * @since 1.4.0
 	 *
-	 * @param string $classes body classes
+	 * @param  string $classes body classes
 	 *
 	 * @return string
 	 */
@@ -582,7 +578,7 @@ class CPAC {
 		$css_column_width = false;
 		foreach ( $storage_model->get_columns() as $column ) {
 			if ( $width = $column->get_width() ) {
-				$css_column_width .= ".cp-" . $storage_model->get_key() . " .wrap table th.column-" . $column->get_name() . " { width: " . $width . $column->get_width_unit() . " !important; }";
+				$css_column_width .= '.cp-' . $storage_model->get_key() . ' .wrap table th.column-' . $column->get_name() . ' { width: ' . $width . $column->get_width_unit() . ' !important; }';
 			}
 
 			// Load external scripts
@@ -662,9 +658,9 @@ class CPAC {
 	 *
 	 * @since 2.2
 	 *
-	 * @param string $tab Specifies a tab screen (optional)
+	 * @param  string $tab Specifies a tab screen (optional)
 	 *
-	 * @return bool True if the current screen is the settings screen, false otherwise
+	 * @return bool        True if the current screen is the settings screen, false otherwise
 	 */
 	public function is_settings_screen( $tab = '' ) {
 		return cac_is_setting_screen( $tab );
@@ -678,7 +674,6 @@ class CPAC {
 	 * @return bool Whether the current screen is an Admin Columns screen
 	 */
 	public function is_cac_screen() {
-
 		/**
 		 * Filter whether the current screen is a screen in which Admin Columns is active
 		 *

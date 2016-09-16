@@ -11,7 +11,7 @@ class AC_Column_Post_Status extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-status';
+		$this->properties['type']  = 'column-status';
 		$this->properties['label'] = __( 'Status', 'codepress-admin-columns' );
 	}
 
@@ -35,7 +35,7 @@ class AC_Column_Post_Status extends CPAC_Column {
 	public function get_value( $post_id ) {
 		$statuses = $this->get_statuses();
 		if ( isset( $statuses['future'] ) ) {
-			$statuses['future'] .= " <p class='description'>" . date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( get_post_field( 'post_date', $post_id ) ) ) . "</p>";
+			$statuses['future'] .= " <p class='description'>" . date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( get_post_field( 'post_date', $post_id ) ) ) . '</p>';
 		}
 		$post_status = $this->get_raw_value( $post_id );
 

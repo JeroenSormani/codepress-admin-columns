@@ -9,7 +9,7 @@ class AC_Column_Post_DatePublished extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-date_published';
+		$this->properties['type']  = 'column-date_published';
 		$this->properties['label'] = __( 'Date Published' );
 	}
 

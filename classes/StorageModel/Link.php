@@ -4,12 +4,11 @@ defined( 'ABSPATH' ) or die();
 class AC_StorageModel_Link extends CPAC_Storage_Model {
 
 	function __construct() {
-
-		$this->key = 'wp-links';
-		$this->label = __( 'Links' );
-		$this->singular_label = __( 'Link' );
-		$this->type = 'link';
-		$this->page = 'link-manager';
+		$this->key             = 'wp-links';
+		$this->label           = __( 'Links' );
+		$this->singular_label  = __( 'Link' );
+		$this->type            = 'link';
+		$this->page            = 'link-manager';
 		$this->table_classname = 'WP_Links_List_Table';
 
 		parent::__construct();
@@ -31,7 +30,6 @@ class AC_StorageModel_Link extends CPAC_Storage_Model {
 	}
 
 	public function get_default_columns() {
-
 		if ( ! function_exists( '_get_list_table' ) ) {
 			return array();
 		}
@@ -41,7 +39,7 @@ class AC_StorageModel_Link extends CPAC_Storage_Model {
 		do_action( "cac/columns/default/storage_key={$this->key}" );
 
 		// get columns
-		$table = $this->get_list_table();
+		$table   = $this->get_list_table();
 		$columns = (array) $table->get_columns();
 
 		return $columns;

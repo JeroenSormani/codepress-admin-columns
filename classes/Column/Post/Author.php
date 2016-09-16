@@ -11,7 +11,7 @@ class AC_Column_Post_Author extends AC_Column_Default {
 
 		$this->properties['type'] = 'author';
 
-		$this->default_options['width'] = 10;
+		$this->default_options['width']      = 10;
 		$this->default_options['width_unit'] = '%';
 	}
 

@@ -9,7 +9,7 @@ class AC_Column_Link_Description extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-description';
+		$this->properties['type']  = 'column-description';
 		$this->properties['label'] = __( 'Description', 'codepress-admin-columns' );
 	}
 

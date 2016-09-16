@@ -11,7 +11,7 @@ class AC_Column_Post_Depth extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-depth';
+		$this->properties['type']  = 'column-depth';
 		$this->properties['label'] = __( 'Depth', 'codepress-admin-columns' );
 	}
 

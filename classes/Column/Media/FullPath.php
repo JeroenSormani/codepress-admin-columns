@@ -9,7 +9,7 @@ class AC_Column_Media_FullPath extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-full_path';
+		$this->properties['type']  = 'column-full_path';
 		$this->properties['label'] = __( 'Full path', 'codepress-admin-columns' );
 
 		$this->default_options['path_scope'] = 'full';
@@ -27,7 +27,7 @@ class AC_Column_Media_FullPath extends CPAC_Column {
 			switch ( $this->get_pathscope() ) {
 				case 'relative-domain' :
 					$file = str_replace( 'https://', 'http://', $file );
-					$url = str_replace( 'https://', 'http://', home_url( '/' ) );
+					$url  = str_replace( 'https://', 'http://', home_url( '/' ) );
 
 					if ( strpos( $file, $url ) === 0 ) {
 						$file = '/' . substr( $file, strlen( $url ) );
@@ -36,8 +36,8 @@ class AC_Column_Media_FullPath extends CPAC_Column {
 					break;
 				case 'relative-uploads' :
 					$uploaddir = wp_upload_dir();
-					$file = str_replace( 'https://', 'http://', $file );
-					$url = str_replace( 'https://', 'http://', $uploaddir['baseurl'] );
+					$file      = str_replace( 'https://', 'http://', $file );
+					$url       = str_replace( 'https://', 'http://', $uploaddir['baseurl'] );
 
 					if ( strpos( $file, $url ) === 0 ) {
 						$file = substr( $file, strlen( $url ) );

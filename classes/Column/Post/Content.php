@@ -9,7 +9,7 @@ class AC_Column_Post_Content extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-content';
+		$this->properties['type']  = 'column-content';
 		$this->properties['label'] = __( 'Content', 'codepress-admin-columns' );
 
 		$this->default_options['excerpt_length'] = 30;

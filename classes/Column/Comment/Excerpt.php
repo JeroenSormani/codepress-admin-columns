@@ -9,7 +9,7 @@ class AC_Column_Comment_Excerpt extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-excerpt';
+		$this->properties['type']  = 'column-excerpt';
 		$this->properties['label'] = __( 'Content', 'codepress-admin-columns' );
 
 		$this->default_options['excerpt_length'] = 15;

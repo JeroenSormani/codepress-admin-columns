@@ -9,7 +9,7 @@ class AC_Column_Media_Width extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-width';
+		$this->properties['type']  = 'column-width';
 		$this->properties['label'] = __( 'Width', 'codepress-admin-columns' );
 	}
 

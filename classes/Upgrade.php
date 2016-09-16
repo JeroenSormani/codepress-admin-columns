@@ -16,7 +16,6 @@ class AC_Upgrade {
 	 * @since 2.0
 	 */
 	function __construct() {
-
 		add_action( 'admin_init', array( $this, 'init' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ), 11 );
 		add_action( 'admin_head', array( $this, 'admin_head' ) );
@@ -32,7 +31,7 @@ class AC_Upgrade {
 	 *
 	 * @since 2.2.7
 	 */
-	public function admin_head() { ?>
+	public function admin_head() {?>
 		<style type="text/css">
 			#menu-settings a[href="options-general.php?page=cpac-upgrade"] {
 				display: none;
@@ -79,7 +78,6 @@ class AC_Upgrade {
 	 * @since 2.0
 	 */
 	public function admin_menu() {
-
 		// Don't run on plugin activate
 		if ( isset( $_GET['action'] ) && 'activate-plugin' === $_GET['action'] ) {
 			return;
@@ -93,7 +91,6 @@ class AC_Upgrade {
 	 * @since 2.0
 	 */
 	public function init() {
-
 		// @dev_only delete_option( 'cpac_version' ); set_transient( 'cpac_show_welcome', 'display' );
 		$version = get_option( 'cpac_version', false );
 
@@ -124,14 +121,14 @@ class AC_Upgrade {
 				if ( ! ( isset( $_REQUEST['page'] ) && 'cpac-upgrade' === $_REQUEST['page'] ) ) {
 
 					$message = __( 'Admin Columns', 'codepress-admin-columns' ) . ' v' . cpac()->get_version() . ' ' .
-					           __( 'requires a database upgrade', 'codepress-admin-columns' ) .
-					           ' (<a class="thickbox" href="' . admin_url() .
-					           'plugin-install.php?tab=plugin-information&plugin=codepress-admin-columns&section=changelog&TB_iframe=true&width=640&height=559">' .
-					           __( 'why?', 'codepress-admin-columns' ) . '</a>). ' .
-					           __( "Please", 'codepress-admin-columns' ) . ' <a href="http://codex.wordpress.org/Backing_Up_Your_Database">' .
-					           __( "backup your database", 'codepress-admin-columns' ) . '</a>, ' .
-					           __( "then click", 'codepress-admin-columns' ) . ' <a href="' . admin_url() . 'options-general.php?page=cpac-upgrade" class="button">' .
-					           __( "Upgrade Database", 'codepress-admin-columns' ) . '</a>';
+								__( 'requires a database upgrade', 'codepress-admin-columns' ) .
+								' (<a class="thickbox" href="' . admin_url() .
+								'plugin-install.php?tab=plugin-information&plugin=codepress-admin-columns&section=changelog&TB_iframe=true&width=640&height=559">' .
+								__( 'why?', 'codepress-admin-columns' ) . '</a>). ' .
+								__( 'Please', 'codepress-admin-columns' ) . ' <a href="http://codex.wordpress.org/Backing_Up_Your_Database">' .
+								__( 'backup your database', 'codepress-admin-columns' ) . '</a>, ' .
+								__( 'then click', 'codepress-admin-columns' ) . ' <a href="' . admin_url() . 'options-general.php?page=cpac-upgrade" class="button">' .
+								__( 'Upgrade Database', 'codepress-admin-columns' ) . '</a>';
 
 					cpac_admin_message( $message, 'updated' );
 				}
@@ -157,11 +154,10 @@ class AC_Upgrade {
 	 * @since 2.0
 	 */
 	public function ajax_upgrade() {
-
 		// vars
 		$return = array(
 			'status'  => false,
-			'message' => "",
+			'message' => '',
 			'next'    => false,
 		);
 
@@ -184,7 +180,7 @@ class AC_Upgrade {
 						if ( $old_columns ) {
 
 							// used to determine clone ID
-							$tax_count = null;
+							$tax_count  = null;
 							$post_count = null;
 							$meta_count = null;
 
@@ -209,8 +205,8 @@ class AC_Upgrade {
 
 									// is user post count?
 									if ( strpos( $old_column_name, 'column-user_postcount-' ) !== false ) {
-										$settings['type'] = 'column-user_postcount';
-										$settings['clone'] = $post_count;
+										$settings['type']      = 'column-user_postcount';
+										$settings['clone']     = $post_count;
 										$settings['post_type'] = str_replace( 'column-user_postcount-', '', $old_column_name );
 
 										$name = $post_count ? $settings['type'] . '-' . $settings['clone'] : $settings['type'];
@@ -222,17 +218,16 @@ class AC_Upgrade {
 								elseif ( 'wp-media' == $storage_key ) {
 
 									if ( 'column-filesize' == $old_column_name ) {
-										$name = 'column-file_size';
+										$name             = 'column-file_size';
 										$settings['type'] = $name;
 									}
 									// is EXIF data?
 									elseif ( strpos( $old_column_name, 'column-image-' ) !== false ) {
-										$name = 'column-exif_data';
-										$settings['type'] = $name;
+										$name                      = 'column-exif_data';
+										$settings['type']          = $name;
 										$settings['exif_datatype'] = str_replace( 'column-image-', '', $old_column_name );
-									}
-									elseif ( 'column-file_paths' == $old_column_name ) {
-										$name = 'column-available_sizes';
+									} elseif ( 'column-file_paths' == $old_column_name ) {
+										$name             = 'column-available_sizes';
 										$settings['type'] = $name;
 									}
 								}
@@ -241,7 +236,7 @@ class AC_Upgrade {
 								elseif ( 'wp-comments' == $storage_key ) {
 
 									if ( 'column-author_author' == $old_column_name ) {
-										$name = 'column-author';
+										$name             = 'column-author';
 										$settings['type'] = $name;
 									}
 								}
@@ -250,37 +245,30 @@ class AC_Upgrade {
 								else {
 
 									if ( 'column-attachment-count' == $old_column_name ) {
-										$name = 'column-attachment_count';
+										$name             = 'column-attachment_count';
 										$settings['type'] = $name;
-									}
-									elseif ( 'column-author-name' == $old_column_name ) {
-										$name = 'column-author_name';
-										$settings['type'] = $name;
+									} elseif ( 'column-author-name' == $old_column_name ) {
+										$name                          = 'column-author_name';
+										$settings['type']              = $name;
 										$settings['display_author_as'] = $old_column_settings['display_as'];
-									}
-									elseif ( 'column-before-moretag' == $old_column_name ) {
-										$name = 'column-before_moretag';
+									} elseif ( 'column-before-moretag' == $old_column_name ) {
+										$name             = 'column-before_moretag';
 										$settings['type'] = $name;
-									}
-									elseif ( 'column-comment-count' == $old_column_name ) {
-										$name = 'column-comment_count';
-										$settings['type'] = $name;
+									} elseif ( 'column-comment-count' == $old_column_name ) {
+										$name                       = 'column-comment_count';
+										$settings['type']           = $name;
 										$settings['comment_status'] = 'total_comments';
-									}
-									elseif ( 'column-comment-status' == $old_column_name ) {
-										$name = 'column-comment_status';
+									} elseif ( 'column-comment-status' == $old_column_name ) {
+										$name             = 'column-comment_status';
 										$settings['type'] = $name;
-									}
-									elseif ( 'column-ping-status' == $old_column_name ) {
-										$name = 'column-ping_status';
+									} elseif ( 'column-ping-status' == $old_column_name ) {
+										$name             = 'column-ping_status';
 										$settings['type'] = $name;
-									}
-									elseif ( 'column-page-slug' == $old_column_name ) {
-										$name = 'column-slug';
+									} elseif ( 'column-page-slug' == $old_column_name ) {
+										$name             = 'column-slug';
 										$settings['type'] = $name;
-									}
-									elseif ( 'column-page-template' == $old_column_name ) {
-										$name = 'column-page_template';
+									} elseif ( 'column-page-template' == $old_column_name ) {
+										$name             = 'column-page_template';
 										$settings['type'] = $name;
 									}
 								}
@@ -289,8 +277,8 @@ class AC_Upgrade {
 
 								// is taxonomy?
 								if ( strpos( $old_column_name, 'column-taxonomy-' ) !== false ) {
-									$settings['type'] = 'column-taxonomy';
-									$settings['clone'] = $tax_count;
+									$settings['type']     = 'column-taxonomy';
+									$settings['clone']    = $tax_count;
 									$settings['taxonomy'] = str_replace( 'column-taxonomy-', '', $old_column_name );
 
 									$name = $tax_count ? $settings['type'] . '-' . $settings['clone'] : $settings['type'];
@@ -299,15 +287,14 @@ class AC_Upgrade {
 								// is custom field?
 								elseif ( strpos( $old_column_name, 'column-meta-' ) !== false ) {
 
-									$settings['type'] = 'column-meta';
+									$settings['type']  = 'column-meta';
 									//$settings['clone'] = str_replace( 'column-meta-', '', $old_column_name );
 									$settings['clone'] = $meta_count;
 
 									$name = $meta_count ? $settings['type'] . '-' . $settings['clone'] : $settings['type'];
 									$meta_count++;
-								}
-								elseif ( 'column-word-count' == $old_column_name ) {
-									$name = 'column-word_count';
+								} elseif ( 'column-word-count' == $old_column_name ) {
+									$name             = 'column-word_count';
 									$settings['type'] = $name;
 								}
 
@@ -319,8 +306,7 @@ class AC_Upgrade {
 								foreach ( $columns as $name => $_settings ) {
 									if ( 'on' === $_settings['state'] ) {
 										$active[ $name ] = $_settings;
-									}
-									else {
+									} else {
 										$inactive[ $name ] = $_settings;
 									}
 								}
@@ -340,7 +326,7 @@ class AC_Upgrade {
 
 				$return = array(
 					'status'  => true,
-					'message' => __( "Migrating Column Settings", 'codepress-admin-columns' ) . '...',
+					'message' => __( 'Migrating Column Settings', 'codepress-admin-columns' ) . '...',
 					'next'    => false,
 				);
 
@@ -352,15 +338,14 @@ class AC_Upgrade {
 		die;
 	}
 
-	/*
-	* Starting points of the upgrade process
-	*
-	* @since 2.0
-	*/
+	/**
+	 * Starting points of the upgrade process
+	 *
+	 * @since 2.0
+	 */
 	public function start_upgrade() {
-
 		$version = get_option( 'cpac_version', '1.0.0' );
-		$next = false;
+		$next    = false;
 
 		// list of starting points
 		if ( $version < '2.0.0' ) {
@@ -393,9 +378,10 @@ class AC_Upgrade {
 
 		// javascript translations
 		wp_localize_script( 'cpac-upgrade', 'cpac_upgrade_i18n', array(
-			'complete'    => __( 'Upgrade Complete!', 'codepress-admin-columns' ) . '</p><p><a href="' . admin_url( 'options-general.php' ) . '?page=codepress-admin-columns&info">' . __( 'Return to settings.', 'codepress-admin-columns' ) . "</a>",
+			'complete'    => __( 'Upgrade Complete!', 'codepress-admin-columns' ) . '</p><p><a href="' . admin_url( 'options-general.php' ) . '?page=codepress-admin-columns&info">' . __( 'Return to settings.', 'codepress-admin-columns' ) . '</a>',
 			'error'       => __( 'Error', 'codepress-admin-columns' ),
 			'major_error' => __( 'Sorry. Something went wrong during the upgrade process. Please report this on the support forum.', 'codepress-admin-columns' )
 		) );
 	}
+
 }

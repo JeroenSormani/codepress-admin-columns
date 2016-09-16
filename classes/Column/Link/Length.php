@@ -9,7 +9,7 @@ class AC_Column_Link_Length extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-length';
+		$this->properties['type']  = 'column-length';
 		$this->properties['label'] = __( 'Length', 'codepress-admin-columns' );
 	}
 

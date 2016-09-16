@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) or die();
  * @since 1.5.0
  *
  * @param string $message Message.
- * @param string $type Update Type.
+ * @param string $type    Update Type.
  */
 function cpac_admin_message( $message = '', $type = 'updated' ) {
 	$GLOBALS['cpac_messages'][] = '<div class="cpac_message ' . $type . '"><p>' . $message . '</p></div>';
@@ -131,9 +131,9 @@ function cpac_is_addon_woocommerce_active() {
  *
  * @since 2.4.8
  *
- * @param strong $tab Specifies a tab screen (optional)
+ * @param  strong $tab Specifies a tab screen (optional)
  *
- * @return bool True if the current screen is the settings screen, false otherwise
+ * @return bool        True if the current screen is the settings screen, false otherwise
  */
 function cac_is_setting_screen( $tab = '' ) {
 	global $pagenow;

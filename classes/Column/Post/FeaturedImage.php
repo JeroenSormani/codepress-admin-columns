@@ -9,11 +9,11 @@ class AC_Column_Post_FeaturedImage extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-featured_image';
+		$this->properties['type']  = 'column-featured_image';
 		$this->properties['label'] = __( 'Featured Image', 'codepress-admin-columns' );
 
 		// Options
-		$this->default_options['image_size'] = '';
+		$this->default_options['image_size']   = '';
 		$this->default_options['image_size_w'] = 80;
 		$this->default_options['image_size_h'] = 80;
 	}
@@ -24,7 +24,7 @@ class AC_Column_Post_FeaturedImage extends CPAC_Column {
 
 	public function get_value( $post_id ) {
 		$attachment_id = $this->get_raw_value( $post_id );
-		$thumb = $this->format->images( $attachment_id );
+		$thumb         = $this->format->images( $attachment_id );
 
 		if ( ! $thumb ) {
 			return false;

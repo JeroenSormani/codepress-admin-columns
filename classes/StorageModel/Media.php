@@ -4,21 +4,19 @@ defined( 'ABSPATH' ) or die();
 class AC_StorageModel_Media extends CPAC_Storage_Model {
 
 	public function __construct() {
-
-		$this->key = 'wp-media';
-		$this->label = __( 'Media Library' );
-		$this->singular_label = __( 'Media' );
-		$this->type = 'media';
-		$this->meta_type = 'post';
-		$this->page = 'upload';
-		$this->post_type = 'attachment';
+		$this->key             = 'wp-media';
+		$this->label           = __( 'Media Library' );
+		$this->singular_label  = __( 'Media' );
+		$this->type            = 'media';
+		$this->meta_type       = 'post';
+		$this->page            = 'upload';
+		$this->post_type       = 'attachment';
 		$this->table_classname = 'WP_Media_List_Table';
 
 		parent::__construct();
 	}
 
 	public function get_single_row( $id ) {
-
 		// Author column depends on this global to be set.
 		global $authordata;
 		$authordata = get_userdata( get_post_field( 'post_author', $id ) );
@@ -50,7 +48,7 @@ class AC_StorageModel_Media extends CPAC_Storage_Model {
 		// See classes/third_party.php for an example.
 		do_action( "cac/columns/default/storage_key={$this->key}" );
 
-		$table = $this->get_list_table();
+		$table   = $this->get_list_table();
 		$columns = (array) $table->get_columns();
 
 		if ( cac_is_setting_screen() ) {

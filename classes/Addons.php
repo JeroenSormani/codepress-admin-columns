@@ -16,7 +16,6 @@ class AC_Addons {
 	 * @param CPAC
 	 */
 	function __construct() {
-
 		// Redirect to addons settings tab on activation & deactivation
 		if ( is_admin() ) {
 			add_filter( 'wp_redirect', array( $this, 'addon_plugin_statuschange_redirect' ) );
@@ -34,7 +33,6 @@ class AC_Addons {
 	 * @since 2.4.9
 	 */
 	public function missing_addon_notices() {
-
 		if ( cpac()->suppress_site_wide_notices() ) {
 			return;
 		}
@@ -65,7 +63,7 @@ class AC_Addons {
 			if ( $num_plugins > 1 ) {
 				if ( $num_plugins > 2 ) {
 					$plugins_list = implode( ', ', array_slice( $plugins, 0, $num_plugins - 1 ) );
-					$plugins = array( $plugins_list, $plugins[ $num_plugins - 1 ] );
+					$plugins      = array( $plugins_list, $plugins[ $num_plugins - 1 ] );
 				}
 
 				$plugins_list = sprintf( __( '%s and %s', 'codepress-admin-columns' ), $plugins[0], $plugins[1] );
@@ -75,7 +73,7 @@ class AC_Addons {
 				<a href="#" class="hide-notice hide-install-addons-notice"></a>
 
 				<p><?php printf(
-						__( "Did you know Admin Columns Pro has an integration addon for %s? With the proper Admin Columns Pro license, you can download them from %s!", 'codepress-admin-columns' ),
+						__( 'Did you know Admin Columns Pro has an integration addon for %s? With the proper Admin Columns Pro license, you can download them from %s!', 'codepress-admin-columns' ),
 						$plugins_list,
 						'<a href="' . esc_attr( cpac()->settings()->get_settings_url( 'addons' ) ) . '">' . esc_html( __( 'the addons page', 'codepress-admin-columns' ) ) . '</a>'
 					); ?>
@@ -151,7 +149,6 @@ class AC_Addons {
 	 * @since 2.4.9
 	 */
 	public function ajax_hide_install_addons_notice() {
-
 		update_user_meta( get_current_user_id(), self::OPTION_ADMIN_NOTICE_INSTALL_ADDONS_KEY, '1', true );
 	}
 
@@ -161,7 +158,6 @@ class AC_Addons {
 	 * @since 2.2
 	 */
 	public function handle_install_request() {
-
 		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'install-cac-addon' ) || ! isset( $_GET['plugin'] ) ) {
 			return;
 		}
@@ -203,7 +199,6 @@ class AC_Addons {
 	 * @see filter:wp_redirect
 	 */
 	public function addon_plugin_statuschange_redirect( $location ) {
-
 		if ( ! isset( $_GET['cpac-redirect'] ) ) {
 			return $location;
 		}
@@ -238,7 +233,6 @@ class AC_Addons {
 	 * @return array Available addon groups ([group_name] => [label])
 	 */
 	public function get_addon_groups() {
-
 		$addon_groups = array(
 			'integration' => __( 'Plugins', 'codepress-admin-columns' )
 		);
@@ -258,12 +252,11 @@ class AC_Addons {
 	/**
 	 * @since 2.2
 	 *
-	 * @param bool $grouped Whether to group the plugins by addon group ()
+	 * @param  bool  $grouped Whether to group the plugins by addon group ()
 	 *
-	 * @return array Available addons ([addon_basename] => (array) [addon_details] if not grouped, a list of these key-value pairs per group otherwise ([group_name] => (array) [group_addons]))
+	 * @return array          Available addons ([addon_basename] => (array) [addon_details] if not grouped, a list of these key-value pairs per group otherwise ([group_name] => (array) [group_addons]))
 	 */
 	public function get_available_addons( $grouped = false ) {
-
 		$addons = array(
 			'cac-addon-acf'         => array(
 				'title'       => __( 'Advanced Custom Fields', 'codepress-admin-columns' ),
@@ -309,12 +302,11 @@ class AC_Addons {
 	 *
 	 * @since 2.2
 	 *
-	 * @param string $id Unique addon ID
+	 * @param  string     $id Unique addon ID
 	 *
-	 * @return bool|array Returns addon details if the add-on exists, false otherwise
+	 * @return bool|array     Returns addon details if the add-on exists, false otherwise
 	 */
 	public function get_addon( $id ) {
-
 		$addons = $this->get_available_addons();
 
 		if ( isset( $addons[ $id ] ) ) {
@@ -330,13 +322,12 @@ class AC_Addons {
 	 * @since 2.2
 	 * @uses CPAC_Addons::group_addons()
 	 *
-	 * @param array $addons List of addons ([addon_name] => (array) [addon_details])
+	 * @param  array $addons List of addons ([addon_name] => (array) [addon_details])
 	 *
-	 * @return array A list of addons per group: [group_name] => (array) [group_addons], where [group_addons] is an array ([addon_name] => (array) [addon_details])
+	 * @return array         A list of addons per group: [group_name] => (array) [group_addons], where [group_addons] is an array ([addon_name] => (array) [addon_details])
 	 */
 	public function group_addons( $addons ) {
-
-		$groups = $this->get_addon_groups();
+		$groups         = $this->get_addon_groups();
 		$grouped_addons = array();
 
 		foreach ( $addons as $addon_name => $addon ) {
@@ -359,9 +350,9 @@ class AC_Addons {
 	 *
 	 * @since 2.2
 	 *
-	 * @param string $slug Plugin directory name/slug
+	 * @param  string $slug Plugin directory name/slug
 	 *
-	 * @return bool Returns true if there is no add-on installed with the passed ID, false otherwise
+	 * @return bool         Returns true if there is no add-on installed with the passed ID, false otherwise
 	 */
 	public function is_addon_installed( $slug ) {
 		return $this->get_installed_addon_plugin_basename( $slug ) ? true : false;
@@ -372,9 +363,9 @@ class AC_Addons {
 	 *
 	 * @since 2.2
 	 *
-	 * @param string $slug Plugin directory name/slug
+	 * @param  string      $slug Plugin directory name/slug
 	 *
-	 * @return string|bool Returns the plugin basename if the plugin is installed, false otherwise
+	 * @return string|bool       Returns the plugin basename if the plugin is installed, false otherwise
 	 */
 	public function get_installed_addon_plugin_basename( $slug ) {
 		$plugins = (array) get_plugins();
@@ -391,9 +382,9 @@ class AC_Addons {
 	/**
 	 * @since 2.2
 	 *
-	 * @param string $slug Plugin directory name/slug
+	 * @param  string      $slug Plugin directory name/slug
 	 *
-	 * @return string|bool Returns the plugin version if the plugin is installed, false otherwise
+	 * @return string|bool       Returns the plugin version if the plugin is installed, false otherwise
 	 */
 	public function get_installed_addon_plugin_version( $slug ) {
 		$plugins = (array) get_plugins();

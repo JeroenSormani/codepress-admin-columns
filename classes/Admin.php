@@ -23,13 +23,12 @@ class AC_Admin {
 	 * @param object CPAC
 	 */
 	function __construct() {
-
 		add_action( 'admin_menu', array( $this, 'settings_menu' ) );
 		add_action( 'cpac_messages', array( $this, 'maybe_display_addon_statuschange_message' ) );
 
-		$this->columns = new AC_Admin_Columns();
+		$this->columns  = new AC_Admin_Columns();
 		$this->settings = new AC_Admin_Settings();
-		$this->addons = new AC_Admin_Addons();
+		$this->addons   = new AC_Admin_Addons();
 	}
 
 	/**
@@ -60,9 +59,9 @@ class AC_Admin {
 	 *
 	 * @since 2.2
 	 *
-	 * @param string $page Optional. Admin page to get the URL from. Defaults to the basic Admin Columns page
+	 * @param  string $page Optional. Admin page to get the URL from. Defaults to the basic Admin Columns page
 	 *
-	 * @return string Settings page URL
+	 * @return string       Settings page URL
 	 */
 	public function get_settings_url( $page = '' ) {
 		$settings_urls = $this->get_settings_urls();
@@ -92,8 +91,7 @@ class AC_Admin {
 
 		if ( ! empty( $_REQUEST['activate'] ) ) {
 			$message = __( 'Add-on successfully activated.', 'codepress-admin-columns' );
-		}
-		else if ( ! empty( $_REQUEST['deactivate'] ) ) {
+		} elseif ( ! empty( $_REQUEST['deactivate'] ) ) {
 			$message = __( 'Add-on successfully deactivated.', 'codepress-admin-columns' );
 		}
 
@@ -145,7 +143,6 @@ class AC_Admin {
 	 * @since 1.0
 	 */
 	public function admin_scripts() {
-
 		// width slider
 		wp_enqueue_style( 'jquery-ui-lightness', cpac()->get_plugin_url() . 'assets/ui-theme/jquery-ui-1.8.18.custom.css', array(), cpac()->get_version(), 'all' );
 		wp_enqueue_script( 'jquery-ui-slider' );
@@ -186,41 +183,41 @@ class AC_Admin {
 
 		$tabs = array(
 			array(
-				'title'   => __( "Overview", 'codepress-admin-columns' ),
-				'content' => "<h5>Admin Columns</h5>
-					<p>" . __( "This plugin is for adding and removing additional columns to the administration screens for post(types), pages, media library, comments, links and users. Change the column's label and reorder them.", 'codepress-admin-columns' ) . "</p>",
+				'title'   => __( 'Overview', 'codepress-admin-columns' ),
+				'content' => '<h5>Admin Columns</h5>
+					<p>' . __( "This plugin is for adding and removing additional columns to the administration screens for post(types), pages, media library, comments, links and users. Change the column's label and reorder them.", 'codepress-admin-columns' ) . '</p>',
 			),
 			array(
-				'title'   => __( "Basics", 'codepress-admin-columns' ),
-				'content' => "
-					<h5>" . __( "Change order", 'codepress-admin-columns' ) . "</h5>
-					<p>" . __( "By dragging the columns you can change the order which they will appear in.", 'codepress-admin-columns' ) . "</p>
-					<h5>" . __( "Change label", 'codepress-admin-columns' ) . "</h5>
-					<p>" . __( "By clicking on the triangle you will see the column options. Here you can change each label of the columns heading.", 'codepress-admin-columns' ) . "</p>
-					<h5>" . __( "Change column width", 'codepress-admin-columns' ) . "</h5>
-					<p>" . __( "By clicking on the triangle you will see the column options. By using the draggable slider you can set the width of the columns in percentages.", 'codepress-admin-columns' ) . "</p>
-				",
+				'title'   => __( 'Basics', 'codepress-admin-columns' ),
+				'content' => '
+					<h5>' . __( 'Change order', 'codepress-admin-columns' ) . '</h5>
+					<p>' . __( 'By dragging the columns you can change the order which they will appear in.', 'codepress-admin-columns' ) . '</p>
+					<h5>' . __( 'Change label', 'codepress-admin-columns' ) . '</h5>
+					<p>' . __( 'By clicking on the triangle you will see the column options. Here you can change each label of the columns heading.', 'codepress-admin-columns' ) . '</p>
+					<h5>' . __( 'Change column width', 'codepress-admin-columns' ) . '</h5>
+					<p>' . __( 'By clicking on the triangle you will see the column options. By using the draggable slider you can set the width of the columns in percentages.', 'codepress-admin-columns' ) . '</p>
+				',
 			),
 			array(
-				'title'   => __( "Custom Field", 'codepress-admin-columns' ),
-				'content' => "<h5>" . __( "'Custom Field' column", 'codepress-admin-columns' ) . "</h5>
-					<p>" . __( "The custom field colum uses the custom fields from posts and users. There are 10 types which you can set.", 'codepress-admin-columns' ) . "</p>
+				'title'   => __( 'Custom Field', 'codepress-admin-columns' ),
+				'content' => '<h5>' . __( "'Custom Field' column", 'codepress-admin-columns' ) . '</h5>
+					<p>' . __( 'The custom field colum uses the custom fields from posts and users. There are 10 types which you can set.', 'codepress-admin-columns' ) . '</p>
 					<ul>
-						<li><strong>" . __( "Default", 'codepress-admin-columns' ) . "</strong><br/>" . __( "Value: Can be either a string or array. Arrays will be flattened and values are seperated by a ',' comma.", 'codepress-admin-columns' ) . "</li>
-						<li><strong>" . __( "Checkmark", 'codepress-admin-columns' ) . "</strong><br/>" . __( "Value: should be a 1 (one) or 0 (zero).", 'codepress-admin-columns' ) . "</li>
-						<li><strong>" . __( "Color", 'codepress-admin-columns' ) . "</strong><br/>" . __( "Value: hex value color, such as #808080.", 'codepress-admin-columns' ) . "</li>
-						<li><strong>" . __( "Counter", 'codepress-admin-columns' ) . "</strong><br/>" . __( "Value: Can be either a string or array. This will display a count of the number of times the meta key is used by the item.", 'codepress-admin-columns' ) . "</li>
-						<li><strong>" . __( "Date", 'codepress-admin-columns' ) . "</strong><br/>" . sprintf( __( "Value: Can be unix time stamp or a date format as described in the <a href='%s'>Codex</a>. You can change the outputted date format at the <a href='%s'>general settings</a> page.", 'codepress-admin-columns' ), 'http://codex.wordpress.org/Formatting_Date_and_Time', get_admin_url() . 'options-general.php' ) . "</li>
-						<li><strong>" . __( "Excerpt", 'codepress-admin-columns' ) . "</strong><br/>" . __( "Value: This will show the first 20 words of the Post content.", 'codepress-admin-columns' ) . "</li>
-						<li><strong>" . __( "Image", 'codepress-admin-columns' ) . "</strong><br/>" . __( "Value: should contain an image URL or Attachment IDs ( seperated by a ',' comma ).", 'codepress-admin-columns' ) . "</li>
-						<li><strong>" . __( "Media Library", 'codepress-admin-columns' ) . "</strong><br/>" . __( "Value: should contain Attachment IDs ( seperated by a ',' comma ).", 'codepress-admin-columns' ) . "</li>
-						<li><strong>" . __( "Multiple Values", 'codepress-admin-columns' ) . "</strong><br/>" . __( "Value: should be an array. This will flatten any ( multi dimensional ) array.", 'codepress-admin-columns' ) . "</li>
-						<li><strong>" . __( "Numeric", 'codepress-admin-columns' ) . "</strong><br/>" . __( "Value: Integers only.<br/>If you have the 'sorting addon' this will be used for sorting, so you can sort your posts on numeric (custom field) values.", 'codepress-admin-columns' ) . "</li>
-						<li><strong>" . __( "Post Titles", 'codepress-admin-columns' ) . "</strong><br/>" . __( "Value: can be one or more Post ID's (seperated by ',').", 'codepress-admin-columns' ) . "</li>
-						<li><strong>" . __( "Usernames", 'codepress-admin-columns' ) . "</strong><br/>" . __( "Value: can be one or more User ID's (seperated by ',').", 'codepress-admin-columns' ) . "</li>
-						<li><strong>" . __( "Term Name", 'codepress-admin-columns' ) . "</strong><br/>" . __( "Value: should be an array with term_id and taxonomy.", 'codepress-admin-columns' ) . "</li>
+						<li><strong>' . __( 'Default', 'codepress-admin-columns' ) . '</strong><br/>' . __( "Value: Can be either a string or array. Arrays will be flattened and values are seperated by a ',' comma.", 'codepress-admin-columns' ) . '</li>
+						<li><strong>' . __( 'Checkmark', 'codepress-admin-columns' ) . '</strong><br/>' . __( 'Value: should be a 1 (one) or 0 (zero).', 'codepress-admin-columns' ) . '</li>
+						<li><strong>' . __( 'Color', 'codepress-admin-columns' ) . '</strong><br/>' . __( 'Value: hex value color, such as #808080.', 'codepress-admin-columns' ) . '</li>
+						<li><strong>' . __( 'Counter', 'codepress-admin-columns' ) . '</strong><br/>' . __( 'Value: Can be either a string or array. This will display a count of the number of times the meta key is used by the item.', 'codepress-admin-columns' ) . '</li>
+						<li><strong>' . __( 'Date', 'codepress-admin-columns' ) . '</strong><br/>' . sprintf( __( "Value: Can be unix time stamp or a date format as described in the <a href='%s'>Codex</a>. You can change the outputted date format at the <a href='%s'>general settings</a> page.", 'codepress-admin-columns' ), 'http://codex.wordpress.org/Formatting_Date_and_Time', get_admin_url() . 'options-general.php' ) . '</li>
+						<li><strong>' . __( 'Excerpt', 'codepress-admin-columns' ) . '</strong><br/>' . __( 'Value: This will show the first 20 words of the Post content.', 'codepress-admin-columns' ) . '</li>
+						<li><strong>' . __( 'Image', 'codepress-admin-columns' ) . '</strong><br/>' . __( "Value: should contain an image URL or Attachment IDs ( seperated by a ',' comma ).", 'codepress-admin-columns' ) . '</li>
+						<li><strong>' . __( 'Media Library', 'codepress-admin-columns' ) . '</strong><br/>' . __( "Value: should contain Attachment IDs ( seperated by a ',' comma ).", 'codepress-admin-columns' ) . '</li>
+						<li><strong>' . __( 'Multiple Values', 'codepress-admin-columns' ) . '</strong><br/>' . __( 'Value: should be an array. This will flatten any ( multi dimensional ) array.', 'codepress-admin-columns' ) . '</li>
+						<li><strong>' . __( 'Numeric', 'codepress-admin-columns' ) . '</strong><br/>' . __( "Value: Integers only.<br/>If you have the 'sorting addon' this will be used for sorting, so you can sort your posts on numeric (custom field) values.", 'codepress-admin-columns' ) . '</li>
+						<li><strong>' . __( 'Post Titles', 'codepress-admin-columns' ) . '</strong><br/>' . __( "Value: can be one or more Post ID's (seperated by ',').", 'codepress-admin-columns' ) . '</li>
+						<li><strong>' . __( 'Usernames', 'codepress-admin-columns' ) . '</strong><br/>' . __( "Value: can be one or more User ID's (seperated by ',').", 'codepress-admin-columns' ) . '</li>
+						<li><strong>' . __( 'Term Name', 'codepress-admin-columns' ) . '</strong><br/>' . __( 'Value: should be an array with term_id and taxonomy.', 'codepress-admin-columns' ) . '</li>
 					</ul>
-				",
+				',
 			),
 		);
 
@@ -236,9 +233,9 @@ class AC_Admin {
 	/**
 	 * @since 1.0
 	 *
-	 * @param string $storage_model URL type.
+	 * @param  string $storage_model URL type.
 	 *
-	 * @return string Url.
+	 * @return string                Url.
 	 */
 	public function get_url( $type ) {
 		$urls = array(
@@ -253,7 +250,6 @@ class AC_Admin {
 	 * @since 1.0
 	 */
 	public function display() {
-
 		$welcome_screen = new AC_Admin_Welcome();
 		if ( $welcome_screen->has_upgrade_run() ) {
 			$welcome_screen->display();
@@ -279,7 +275,7 @@ class AC_Admin {
 		<div id="cpac" class="wrap">
 			<h2 class="nav-tab-wrapper cpac-nav-tab-wrapper">
 				<?php foreach ( $tabs as $name => $label ) : ?>
-					<a href="<?php echo esc_url( $this->get_settings_url( 'admin' ) . "&tab=" . $name ); ?>" class="nav-tab<?php echo $current_tab == $name ? ' nav-tab-active' : ''; ?>"><?php echo esc_html( $label ); ?></a>
+					<a href="<?php echo esc_url( $this->get_settings_url( 'admin' ) . '&tab=' . $name ); ?>" class="nav-tab<?php echo $current_tab == $name ? ' nav-tab-active' : ''; ?>"><?php echo esc_html( $label ); ?></a>
 				<?php endforeach; ?>
 			</h2>
 
@@ -302,7 +298,6 @@ class AC_Admin {
 
 					/**
 					 * Action to add tab contents
-					 *
 					 */
 					do_action( 'cac/settings/tab_contents/tab=' . $current_tab );
 

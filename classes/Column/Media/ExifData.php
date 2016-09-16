@@ -9,7 +9,7 @@ class AC_Column_Media_ExifData extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-exif_data';
+		$this->properties['type']  = 'column-exif_data';
 		$this->properties['label'] = __( 'EXIF data', 'codepress-admin-columns' );
 	}
 

@@ -9,7 +9,7 @@ class AC_Column_Media_Caption extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-caption';
+		$this->properties['type']  = 'column-caption';
 		$this->properties['label'] = __( 'Caption', 'codepress-admin-columns' );
 	}
 

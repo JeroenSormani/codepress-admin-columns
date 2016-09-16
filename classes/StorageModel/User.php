@@ -7,13 +7,12 @@ class AC_StorageModel_User extends CPAC_Storage_Model {
 	 * @since 2.0
 	 */
 	public function __construct() {
-
-		$this->key = 'wp-users';
-		$this->label = __( 'Users' );
-		$this->singular_label = __( 'User' );
-		$this->type = 'user';
-		$this->meta_type = 'user';
-		$this->page = 'users';
+		$this->key             = 'wp-users';
+		$this->label           = __( 'Users' );
+		$this->singular_label  = __( 'User' );
+		$this->type            = 'user';
+		$this->meta_type       = 'user';
+		$this->page            = 'users';
 		$this->table_classname = 'WP_Users_List_Table';
 
 		parent::__construct();
@@ -54,7 +53,7 @@ class AC_StorageModel_User extends CPAC_Storage_Model {
 	 *
 	 * @param string $value
 	 * @param string $column_name
-	 * @param int $user_id
+	 * @param int    $user_id
 	 */
 	public function manage_value( $value, $column_name, $id ) {
 		return $this->get_display_value_by_column_name( $column_name, $id, $value );

@@ -3,15 +3,15 @@
 class AC_Helper_Taxonomy {
 
 	/**
-	 * @param WP_Term[] $terms Term objects
-	 * @param null|string $post_type
+	 * @param  WP_Term[]   $terms     Term objects
+	 * @param  null|string $post_type
 	 *
 	 * @return string
 	 */
 	public function display( $terms, $post_type = null ) {
 		$value = '';
 		if ( $terms ) {
-			$out = array();
+			$out   = array();
 			$terms = (array) $terms;
 			foreach ( $terms as $t ) {
 				$args = array(
@@ -35,8 +35,8 @@ class AC_Helper_Taxonomy {
 	}
 
 	/**
-	 * @param string $object_type Post, User etc.
-	 * @param string $taxonomy Taxonomy Name
+	 * @param  string $object_type Post, User etc.
+	 * @param  string $taxonomy    Taxonomy Name
 	 *
 	 * @return bool
 	 */

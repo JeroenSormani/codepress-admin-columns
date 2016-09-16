@@ -9,7 +9,7 @@ class AC_Column_User_CommentCount extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-user_commentcount';
+		$this->properties['type']  = 'column-user_commentcount';
 		$this->properties['label'] = __( 'Comment Count' );
 	}
 
