@@ -12,7 +12,7 @@ class AC_Column_Post_LastModifiedAuthor extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-last_modified_author';
+		$this->properties['type']  = 'column-last_modified_author';
 		$this->properties['label'] = __( 'Last Modified Author', 'codepress-admin-columns' );
 	}
 
