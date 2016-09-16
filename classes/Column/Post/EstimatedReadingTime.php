@@ -9,13 +9,13 @@ class AC_Column_Post_EstimatedReadingTime extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-estimated_reading_time';
+		$this->properties['type']  = 'column-estimated_reading_time';
 		$this->properties['label'] = __( 'Estimated Reading Time', 'codepress-admin-columns' );
 
 		$this->default_options['words_per_minute'] = 200;
 	}
 
-	private function get_words_per_minute(  ) {
+	private function get_words_per_minute() {
 		return $this->get_option( 'words_per_minute' );
 	}
 
@@ -61,8 +61,7 @@ class AC_Column_Post_EstimatedReadingTime extends CPAC_Column {
 			}
 			if ( $minutes < 1 ) {
 				$time = $seconds . ' ' . _n( 'second', 'seconds', $seconds, 'codepress-admin-columns' );
-			}
-			else {
+			} else {
 				$time .= ' ' . _n( 'minute', 'minutes', $minutes, 'codepress-admin-columns' );
 			}
 		}
@@ -92,4 +91,5 @@ class AC_Column_Post_EstimatedReadingTime extends CPAC_Column {
 			'placeholder' => __( 'Enter words per minute. For example: 200' )
 		) );
 	}
+
 }
