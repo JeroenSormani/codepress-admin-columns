@@ -12,7 +12,7 @@ class AC_Column_Post_CommentCount extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-comment_count';
+		$this->properties['type']  = 'column-comment_count';
 		$this->properties['label'] = __( 'Comment count', 'codepress-admin-columns' );
 	}
 
@@ -30,12 +30,12 @@ class AC_Column_Post_CommentCount extends CPAC_Column {
 		$value = '';
 
 		$status = $this->get_option( 'comment_status' );
-		$count = $this->get_raw_value( $post_id );
+		$count  = $this->get_raw_value( $post_id );
 
 		if ( $count !== '' ) {
 			$names = $this->get_comment_stati();
 
-			$url = esc_url( add_query_arg( array( 'p' => $post_id, 'comment_status' => $status ), admin_url( 'edit-comments.php' ) ) );
+			$url   = esc_url( add_query_arg( array( 'p' => $post_id, 'comment_status' => $status ), admin_url( 'edit-comments.php' ) ) );
 			$value = "<a href='{$url}' class='cp-{$status}' title='" . $names[ $status ] . "'>{$count}</a>";
 		}
 
@@ -46,7 +46,7 @@ class AC_Column_Post_CommentCount extends CPAC_Column {
 		$value = '';
 
 		$status = $this->get_option( 'comment_status' );
-		$count = wp_count_comments( $post_id );
+		$count  = wp_count_comments( $post_id );
 
 		if ( isset( $count->{$status} ) ) {
 			$value = $count->{$status};
