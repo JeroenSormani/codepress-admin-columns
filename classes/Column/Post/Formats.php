@@ -9,7 +9,7 @@ class AC_Column_Post_Formats extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-post_formats';
+		$this->properties['type']  = 'column-post_formats';
 		$this->properties['label'] = __( 'Post Format', 'codepress-admin-columns' );
 	}
 
