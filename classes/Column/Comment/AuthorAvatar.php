@@ -9,7 +9,7 @@ class AC_Column_Comment_AuthorAvatar extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-author_avatar';
+		$this->properties['type']  = 'column-author_avatar';
 		$this->properties['label'] = __( 'Avatar', 'codepress-admin-columns' );
 	}
 
