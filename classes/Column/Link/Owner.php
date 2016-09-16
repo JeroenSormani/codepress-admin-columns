@@ -9,7 +9,7 @@ class AC_Column_Link_Owner extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-owner';
+		$this->properties['type']  = 'column-owner';
 		$this->properties['label'] = __( 'Owner', 'codepress-admin-columns' );
 	}
 
