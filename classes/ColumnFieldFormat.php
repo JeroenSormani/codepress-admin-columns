@@ -10,7 +10,7 @@ class AC_ColumnFieldFormat {
 	}
 
 	/**
-	 * @param int|WP_User $user
+	 * @param  int|WP_User  $user
 	 *
 	 * @return false|string
 	 */
@@ -19,7 +19,7 @@ class AC_ColumnFieldFormat {
 	}
 
 	/**
-	 * @param string $date
+	 * @param  string $date
 	 *
 	 * @return string
 	 */
@@ -28,7 +28,7 @@ class AC_ColumnFieldFormat {
 	}
 
 	/**
-	 * @param string $words
+	 * @param  string $words
 	 *
 	 * @return string
 	 */
@@ -39,7 +39,7 @@ class AC_ColumnFieldFormat {
 	}
 
 	/**
-	 * @param string $string
+	 * @param  string $string
 	 *
 	 * @return string
 	 */
@@ -66,7 +66,7 @@ class AC_ColumnFieldFormat {
 	}
 
 	/**
-	 * @param int[] $attachment_ids
+	 * @param  int[]  $attachment_ids
 	 *
 	 * @return string
 	 */
