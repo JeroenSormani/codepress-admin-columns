@@ -21,18 +21,18 @@ class AC_ColumnFieldSettings {
 	}
 
 	/**
-	 * @param string $field_name
+	 * @param  string $field_name
 	 *
-	 * @return string Attribute name
+	 * @return string             Attribute name
 	 */
 	public function get_attr_name( $field_name ) {
 		return $this->column->get_storage_model_key() . '[' . $this->column->get_name() . '][' . $field_name . ']';
 	}
 
 	/**
-	 * @param string $field_key
+	 * @param  string $field_key
 	 *
-	 * @return string Attribute Name
+	 * @return string            Attribute Name
 	 */
 	public function get_attr_id( $field_name ) {
 		return 'cpac-' . $this->column->get_storage_model_key() . '-' . $this->column->get_name() . '-' . $field_name;
@@ -72,7 +72,7 @@ class AC_ColumnFieldSettings {
 	}
 
 	/**
-	 * @param bool $fields_only Returns fields without the main label
+	 * @param  bool  $fields_only Returns fields without the main label
 	 *
 	 * @return array
 	 */
@@ -82,8 +82,8 @@ class AC_ColumnFieldSettings {
 		$image_size_w = array(
 			'type'          => 'text',
 			'name'          => 'image_size_w',
-			'label'         => __( "Width", 'codepress-admin-columns' ),
-			'description'   => __( "Width in pixels", 'codepress-admin-columns' ),
+			'label'         => __( 'Width', 'codepress-admin-columns' ),
+			'description'   => __( 'Width in pixels', 'codepress-admin-columns' ),
 			'toggle_handle' => 'image_size_w',
 			'hidden'        => 'cpac-custom' !== $this->get_option( 'image_size' ),
 		);
@@ -91,8 +91,8 @@ class AC_ColumnFieldSettings {
 		$image_size_h = array(
 			'type'          => 'text',
 			'name'          => 'image_size_h',
-			'label'         => __( "Height", 'codepress-admin-columns' ),
-			'description'   => __( "Height in pixels", 'codepress-admin-columns' ),
+			'label'         => __( 'Height', 'codepress-admin-columns' ),
+			'description'   => __( 'Height in pixels', 'codepress-admin-columns' ),
 			'toggle_handle' => 'image_size_h',
 			'hidden'        => 'cpac-custom' !== $this->get_option( 'image_size' ),
 		);
@@ -133,7 +133,7 @@ class AC_ColumnFieldSettings {
 		return array(
 			'type'        => 'text',
 			'name'        => 'before',
-			'label'       => __( "Before", 'codepress-admin-columns' ),
+			'label'       => __( 'Before', 'codepress-admin-columns' ),
 			'description' => __( 'This text will appear before the column value.', 'codepress-admin-columns' ),
 		);
 	}
@@ -142,7 +142,7 @@ class AC_ColumnFieldSettings {
 		return array(
 			'type'        => 'text',
 			'name'        => 'after',
-			'label'       => __( "After", 'codepress-admin-columns' ),
+			'label'       => __( 'After', 'codepress-admin-columns' ),
 			'description' => __( 'This text will appear after the column value.', 'codepress-admin-columns' ),
 		);
 	}
@@ -164,7 +164,7 @@ class AC_ColumnFieldSettings {
 			'label'       => __( 'Date Format', 'codepress-admin-columns' ),
 			'placeholder' => __( 'Example:', 'codepress-admin-columns' ) . ' d M Y H:i',
 			'description' => __( 'This will determine how the date will be displayed.', 'codepress-admin-columns' ),
-			'help'        => sprintf( __( "Leave empty for WordPress date format, change your <a href='%s'>default date format here</a>.", 'codepress-admin-columns' ), admin_url( 'options-general.php' ) . '#date_format_custom_radio' ) . " <a target='_blank' href='http://codex.wordpress.org/Formatting_Date_and_Time'>" . __( 'Documentation on date and time formatting.', 'codepress-admin-columns' ) . "</a>",
+			'help'        => sprintf( __( "Leave empty for WordPress date format, change your <a href='%s'>default date format here</a>.", 'codepress-admin-columns' ), admin_url( 'options-general.php' ) . '#date_format_custom_radio' ) . " <a target='_blank' href='http://codex.wordpress.org/Formatting_Date_and_Time'>" . __( 'Documentation on date and time formatting.', 'codepress-admin-columns' ) . '</a>',
 		);
 	}
 
@@ -310,7 +310,7 @@ class AC_ColumnFieldSettings {
 		?>
 		<div class="is-disabled">
 			<p>
-				<strong><?php printf( __( "The %s column is only available in Admin Columns Pro - Business or Developer.", 'codepress-admin-columns' ), $data->label ); ?></strong>
+				<strong><?php printf( __( 'The %s column is only available in Admin Columns Pro - Business or Developer.', 'codepress-admin-columns' ), $data->label ); ?></strong>
 			</p>
 
 			<p>
@@ -318,7 +318,7 @@ class AC_ColumnFieldSettings {
 			</p>
 
 			<p>
-				<?php printf( __( "Admin Columns Pro offers full %s integration, allowing you to easily display and edit %s fields from within your overview.", 'codepress-admin-columns' ), $data->label, $data->label ); ?>
+				<?php printf( __( 'Admin Columns Pro offers full %s integration, allowing you to easily display and edit %s fields from within your overview.', 'codepress-admin-columns' ), $data->label, $data->label ); ?>
 			</p>
 			<a href="<?php echo add_query_arg( array(
 				'utm_source'   => 'plugin-installation',
@@ -338,7 +338,7 @@ class AC_ColumnFieldSettings {
 			'description' => '',
 			'fields'      => array(),
 		);
-		$args = wp_parse_args( $args, $defaults );
+		$args     = wp_parse_args( $args, $defaults );
 
 		if ( $fields = array_filter( $args['fields'] ) ) : ?>
 			<tr class="section">
@@ -353,7 +353,6 @@ class AC_ColumnFieldSettings {
 			</tr>
 			<?php
 		endif;
-
 	}
 
 	/**
@@ -374,11 +373,11 @@ class AC_ColumnFieldSettings {
 			'help'           => '', // help message below input field
 			'more_link'      => '', // link to more, e.g. admin page for a field
 		);
-		$args = wp_parse_args( $args, $defaults );
+		$args     = wp_parse_args( $args, $defaults );
 
-		$args['current'] = $this->get_option( $args['name'] );
+		$args['current']   = $this->get_option( $args['name'] );
 		$args['attr_name'] = $this->get_attr_name( $args['name'] );
-		$args['attr_id'] = $this->get_attr_id( $args['name'] );
+		$args['attr_id']   = $this->get_attr_id( $args['name'] );
 
 		$field = (object) $args;
 		?>
@@ -429,9 +428,9 @@ class AC_ColumnFieldSettings {
 			'default' => array(
 				'title'   => __( 'Default', 'codepress-admin-columns' ),
 				'options' => array(
-					'thumbnail' => __( "Thumbnail", 'codepress-admin-columns' ),
-					'medium'    => __( "Medium", 'codepress-admin-columns' ),
-					'large'     => __( "Large", 'codepress-admin-columns' ),
+					'thumbnail' => __( 'Thumbnail', 'codepress-admin-columns' ),
+					'medium'    => __( 'Medium', 'codepress-admin-columns' ),
+					'large'     => __( 'Large', 'codepress-admin-columns' ),
 				),
 			),
 		);
@@ -445,7 +444,7 @@ class AC_ColumnFieldSettings {
 				}
 
 				if ( ! isset( $sizes['defined'] ) ) {
-					$sizes['defined']['title'] = __( "Others", 'codepress-admin-columns' );
+					$sizes['defined']['title'] = __( 'Others', 'codepress-admin-columns' );
 				}
 
 				$sizes['defined']['options'][ $size ] = ucwords( str_replace( '-', ' ', $size ) );
@@ -465,7 +464,7 @@ class AC_ColumnFieldSettings {
 		}
 
 		// last
-		$sizes['default']['options']['full'] = __( "Full Size", 'codepress-admin-columns' );
+		$sizes['default']['options']['full'] = __( 'Full Size', 'codepress-admin-columns' );
 
 		$sizes['custom'] = array(
 			'title'   => __( 'Custom', 'codepress-admin-columns' ),
