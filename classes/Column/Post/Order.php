@@ -9,7 +9,7 @@ class AC_Column_Post_Order extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-order';
+		$this->properties['type']  = 'column-order';
 		$this->properties['label'] = __( 'Order', 'codepress-admin-columns' );
 	}
 
