@@ -9,7 +9,7 @@ class AC_Column_Comment_Agent extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-agent';
+		$this->properties['type']  = 'column-agent';
 		$this->properties['label'] = __( 'Agent', 'codepress-admin-columns' );
 	}
 
