@@ -9,7 +9,7 @@ class AC_Column_Post_WordCount extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-word_count';
+		$this->properties['type']  = 'column-word_count';
 		$this->properties['label'] = __( 'Word count', 'codepress-admin-columns' );
 	}
 
