@@ -9,16 +9,16 @@ class AC_Column_Comment_ReplyTo extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-reply_to';
+		$this->properties['type']  = 'column-reply_to';
 		$this->properties['label'] = __( 'In Reply To', 'codepress-admin-columns' );
 	}
 
 	public function get_value( $id ) {
-		$value = '';
+		$value  = '';
 		$parent = $this->get_raw_value( $id );
 		if ( $parent ) {
 			$parent = get_comment( $parent );
-			$value = sprintf( '<a href="%1$s">%2$s</a>', esc_url( get_comment_link( $parent ) ), get_comment_author( $parent->comment_ID ) );
+			$value  = sprintf( '<a href="%1$s">%2$s</a>', esc_url( get_comment_link( $parent ) ), get_comment_author( $parent->comment_ID ) );
 		}
 
 		return $value;
@@ -29,4 +29,5 @@ class AC_Column_Comment_ReplyTo extends CPAC_Column {
 
 		return $comment->comment_parent;
 	}
+
 }
