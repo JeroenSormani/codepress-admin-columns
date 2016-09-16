@@ -9,7 +9,7 @@ class AC_Column_User_ShowToolbar extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-user_show_toolbar';
+		$this->properties['type']  = 'column-user_show_toolbar';
 		$this->properties['label'] = __( 'Show Toolbar', 'codepress-admin-columns' );
 	}
 
