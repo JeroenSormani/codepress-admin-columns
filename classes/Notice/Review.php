@@ -10,7 +10,6 @@ class AC_Notice_Review {
 	private $days_since_install;
 
 	function __construct() {
-
 		register_activation_hook( __FILE__, array( $this, 'insert_install_timestamp' ) );
 
 		// show notice after x days of installing
@@ -36,7 +35,6 @@ class AC_Notice_Review {
 	}
 
 	public function maybe_display_review_notice() {
-
 		if ( cpac()->suppress_site_wide_notices() ) {
 			return;
 		}
@@ -78,7 +76,7 @@ class AC_Notice_Review {
 				</p>
 				<p class="buttons">
 					<a class="button button-primary" href="https://wordpress.org/support/view/plugin-reviews/codepress-admin-columns?rate=5#postform" target="_blank"><?php _e( 'Leave a review!', 'codepress-admin-columns' ); ?></a>
-					<a class="button button-secondary hide-review-notice" href='#'><?php _e( "Permanently hide notice", 'codepress-admin-columns' ); ?></a>
+					<a class="button button-secondary hide-review-notice" href='#'><?php _e( 'Permanently hide notice', 'codepress-admin-columns' ); ?></a>
 				</p>
 			</div>
 			<div class="help">
