@@ -9,7 +9,7 @@ class AC_Column_Post_PingStatus extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-ping_status';
+		$this->properties['type']  = 'column-ping_status';
 		$this->properties['label'] = __( 'Ping Status', 'codepress-admin-columns' );
 	}
 
