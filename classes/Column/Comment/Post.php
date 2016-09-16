@@ -9,11 +9,11 @@ class AC_Column_Comment_Post extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-post';
+		$this->properties['type']  = 'column-post';
 		$this->properties['label'] = __( 'Post', 'codepress-admin-columns' );
 
 		$this->default_options['post_property_display'] = 'title';
-		$this->default_options['post_link_to'] = 'edit_post';
+		$this->default_options['post_link_to']          = 'edit_post';
 	}
 
 	public function get_value( $id ) {
