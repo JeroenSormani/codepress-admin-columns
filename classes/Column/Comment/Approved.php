@@ -9,7 +9,7 @@ class AC_Column_Comment_Approved extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-approved';
+		$this->properties['type']  = 'column-approved';
 		$this->properties['label'] = __( 'Approved', 'codepress-admin-columns' );
 	}
 
