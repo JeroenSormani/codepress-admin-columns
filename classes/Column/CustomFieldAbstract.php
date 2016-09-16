@@ -15,21 +15,21 @@ abstract class AC_Column_CustomFieldAbstract extends CPAC_Column implements AC_C
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-meta';
-		$this->properties['label'] = __( 'Custom Field', 'codepress-admin-columns' );
+		$this->properties['type']    = 'column-meta';
+		$this->properties['label']   = __( 'Custom Field', 'codepress-admin-columns' );
 		$this->properties['classes'] = 'cpac-box-metafield';
-		$this->properties['group'] = __( 'Custom Field', 'codepress-admin-columns' );
+		$this->properties['group']   = __( 'Custom Field', 'codepress-admin-columns' );
 
-		$this->default_options['image_size'] = 'cpac-custom';
-		$this->default_options['image_size_w'] = 80;
-		$this->default_options['image_size_h'] = 80;
+		$this->default_options['image_size']     = 'cpac-custom';
+		$this->default_options['image_size_w']   = 80;
+		$this->default_options['image_size_h']   = 80;
 		$this->default_options['excerpt_length'] = 15;
 	}
 
 	public function get_field_key() {
 		$field = $this->get_option( 'field' );
 
-		return substr( $field, 0, 10 ) == "cpachidden" ? str_replace( 'cpachidden', '', $field ) : $field;
+		return substr( $field, 0, 10 ) == 'cpachidden' ? str_replace( 'cpachidden', '', $field ) : $field;
 	}
 
 	/**
@@ -90,7 +90,6 @@ abstract class AC_Column_CustomFieldAbstract extends CPAC_Column implements AC_C
 	 * @return array Custom Field types.
 	 */
 	public function get_field_labels() {
-
 		$custom_field_types = array(
 			'checkmark'   => __( 'Checkmark (true/false)', 'codepress-admin-columns' ),
 			'color'       => __( 'Color', 'codepress-admin-columns' ),
@@ -164,25 +163,25 @@ abstract class AC_Column_CustomFieldAbstract extends CPAC_Column implements AC_C
 	public function get_value( $id ) {
 		$value = '';
 
-		$raw_value = $this->get_raw_value( $id );
+		$raw_value  = $this->get_raw_value( $id );
 		$raw_string = ac_helper()->array->implode_recursive( ', ', $raw_value );
 
 		switch ( $this->get_field_type() ) :
-			case "image" :
-			case "library_id" :
+			case 'image' :
+			case 'library_id' :
 				$images = ac_helper()->string->comma_separated_to_array( $raw_string );
-				$value = implode( ac_helper()->image->get_images( $images, $this->format->image_sizes() ) );
+				$value  = implode( ac_helper()->image->get_images( $images, $this->format->image_sizes() ) );
 				break;
 
-			case "excerpt" :
+			case 'excerpt' :
 				$value = ac_helper()->string->trim_words( $raw_value, $this->get_option( 'excerpt_length' ) );
 				break;
 
-			case "date" :
+			case 'date' :
 				$value = $this->get_date_by_string( $raw_value );
 				break;
 
-			case "link" :
+			case 'link' :
 				if ( filter_var( $raw_value, FILTER_VALIDATE_URL ) || preg_match( '/[^\w.-]/', $raw_value ) ) {
 					$label = $this->get_option( 'link_label' );
 					if ( ! $label ) {
@@ -192,12 +191,12 @@ abstract class AC_Column_CustomFieldAbstract extends CPAC_Column implements AC_C
 				}
 				break;
 
-			case "title_by_id" :
+			case 'title_by_id' :
 				$titles = array();
 				if ( $ids = ac_helper()->string->string_to_array_integers( $raw_string ) ) {
 					foreach ( (array) $ids as $id ) {
 						if ( $title = ac_helper()->post->get_post_title( $id ) ) {
-							$link = get_edit_post_link( $id );
+							$link     = get_edit_post_link( $id );
 							$titles[] = $link ? "<a href='" . esc_attr( $link ) . "'>{$title}</a>" : $title;
 						}
 					}
@@ -205,12 +204,12 @@ abstract class AC_Column_CustomFieldAbstract extends CPAC_Column implements AC_C
 				$value = implode( '<span class="cpac-divider"></span>', $titles );
 				break;
 
-			case "user_by_id" :
+			case 'user_by_id' :
 				$names = array();
 				if ( $ids = ac_helper()->string->string_to_array_integers( $raw_string ) ) {
 					foreach ( (array) $ids as $id ) {
 						if ( $username = $this->get_username_by_id( $id ) ) {
-							$link = get_edit_user_link( $id );
+							$link    = get_edit_user_link( $id );
 							$names[] = $link ? "<a href='{$link}'>{$username}</a>" : $username;
 						}
 					}
@@ -218,25 +217,25 @@ abstract class AC_Column_CustomFieldAbstract extends CPAC_Column implements AC_C
 				$value = implode( '<span class="cpac-divider"></span>', $names );
 				break;
 
-			case "term_by_id" :
+			case 'term_by_id' :
 				if ( is_array( $raw_value ) && isset( $raw_value['term_id'] ) && isset( $raw_value['taxonomy'] ) ) {
 					$value = ac_helper()->taxonomy->display( (array) get_term_by( 'id', $raw_value['term_id'], $raw_value['taxonomy'] ) );
 				}
 				break;
 
-			case "checkmark" :
+			case 'checkmark' :
 				$is_true = ( ! empty( $raw_value ) && 'false' !== $raw_value && '0' !== $raw_value );
 
 				$value = ac_helper()->icon->yes_or_no( $is_true );
 				break;
 
-			case "color" :
+			case 'color' :
 				$value = $raw_value && is_scalar( $raw_value ) ? ac_helper()->string->get_color_block( $raw_value ) : $this->get_empty_char();
 				break;
 
-			case "count" :
+			case 'count' :
 				$raw_value = $this->get_raw_value( $id, false );
-				$value = $raw_value ? count( $raw_value ) : $this->get_empty_char();
+				$value     = $raw_value ? count( $raw_value ) : $this->get_empty_char();
 				break;
 
 			default :
@@ -251,9 +250,9 @@ abstract class AC_Column_CustomFieldAbstract extends CPAC_Column implements AC_C
 		/**
 		 * Filter the display value for Custom Field columns
 		 *
-		 * @param mixed $value Custom field value
-		 * @param int $id Object ID
-		 * @param object $this Column instance
+		 * @param mixed  $value Custom field value
+		 * @param int    $id    Object ID
+		 * @param object $this  Column instance
 		 */
 		$value = apply_filters( 'cac/column/meta/value', $value, $id, $this );
 
@@ -283,10 +282,9 @@ abstract class AC_Column_CustomFieldAbstract extends CPAC_Column implements AC_C
 			);
 
 			foreach ( $keys as $field ) {
-				if ( substr( $field, 0, 10 ) == "cpachidden" ) {
+				if ( substr( $field, 0, 10 ) == 'cpachidden' ) {
 					$grouped_options['hidden']['options'][ $field ] = substr( $field, 10 );
-				}
-				else {
+				} else {
 					$grouped_options['public']['options'][ $field ] = $field;
 				}
 			}
@@ -302,14 +300,13 @@ abstract class AC_Column_CustomFieldAbstract extends CPAC_Column implements AC_C
 	 * @since 1.0
 	 */
 	public function display_settings() {
-
 		// DOM can get overloaded when dropdown contains to many custom fields. Use this filter to replace the dropdown with a text input.
 		if ( apply_filters( 'cac/column/meta/use_text_input', false ) ) :
 			$this->field_settings->field( array(
 				'type'        => 'text',
 				'name'        => 'field',
-				'label'       => __( "Custom Field", 'codepress-admin-columns' ),
-				'description' => __( "Enter your custom field key.", 'codepress-admin-columns' ),
+				'label'       => __( 'Custom Field', 'codepress-admin-columns' ),
+				'description' => __( 'Enter your custom field key.', 'codepress-admin-columns' ),
 			) );
 		else :
 			$this->field_settings->field( array(
@@ -359,9 +356,9 @@ abstract class AC_Column_CustomFieldAbstract extends CPAC_Column implements AC_C
 	/**
 	 * @since 1.0
 	 *
-	 * @param string $meta
+	 * @param  string $meta
 	 *
-	 * @return int[] Array with integers
+	 * @return int[]        Array with integers
 	 */
 	public function get_ids_from_meta( $meta ) {
 		_deprecated_function( __METHOD__, 'AC NEWVERSION', 'ac_helper()->string->string_to_array_integers()' );
