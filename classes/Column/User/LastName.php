@@ -9,7 +9,7 @@ class AC_Column_User_LastName extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-last_name';
+		$this->properties['type']  = 'column-last_name';
 		$this->properties['label'] = __( 'Last name', 'codepress-admin-columns' );
 	}
 
