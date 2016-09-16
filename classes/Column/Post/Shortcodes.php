@@ -11,7 +11,7 @@ class AC_Column_Post_Shortcodes extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-shortcode';
+		$this->properties['type']  = 'column-shortcode';
 		$this->properties['label'] = __( 'Shortcodes', 'codepress-admin-columns' );
 	}
 
@@ -22,8 +22,8 @@ class AC_Column_Post_Shortcodes extends CPAC_Column {
 
 		$display = array();
 		foreach ( $shortcodes as $sc => $count ) {
-			$string = '[' . $sc . ']';
-			$string = $count > 1 ? $string . '<span class="cpac-rounded">' . $count . '</span>' : $string;
+			$string         = '[' . $sc . ']';
+			$string         = $count > 1 ? $string . '<span class="cpac-rounded">' . $count . '</span>' : $string;
 			$display[ $sc ] = '<span class="cpac-spacing">' . $string . '</span>';
 		}
 
