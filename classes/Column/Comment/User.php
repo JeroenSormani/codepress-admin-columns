@@ -9,7 +9,7 @@ class AC_Column_Comment_User extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-user';
+		$this->properties['type']  = 'column-user';
 		$this->properties['label'] = __( 'User', 'codepress-admin-columns' );
 	}
 
