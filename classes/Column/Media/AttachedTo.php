@@ -9,7 +9,7 @@ class AC_Column_Media_AttachedTo extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-attached_to';
+		$this->properties['type']  = 'column-attached_to';
 		$this->properties['label'] = __( 'Attached to post', 'codepress-admin-columns' );
 	}
 
