@@ -9,8 +9,8 @@ class AC_Column_Post_BeforeMoreTag extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type']	 = 'column-before_moretag';
-		$this->properties['label']	 = __( 'Before More Tag', 'codepress-admin-columns' );
+		$this->properties['type']  = 'column-before_moretag';
+		$this->properties['label'] = __( 'Before More Tag', 'codepress-admin-columns' );
 
 		$this->default_options['excerpt_length'] = 15;
 	}
@@ -22,7 +22,7 @@ class AC_Column_Post_BeforeMoreTag extends CPAC_Column {
 	function get_raw_value( $post_id ) {
 		$value = '';
 
-		$p = get_post( $post_id );
+		$p        = get_post( $post_id );
 		$extended = get_extended( $p->post_content );
 
 		if ( ! empty( $extended['extended'] ) ) {
