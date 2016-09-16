@@ -11,7 +11,7 @@ class AC_Column_ACFPlaceholder extends CPAC_Column {
 	public function init() {
 		parent::init();
 
-		$this->properties['type'] = 'column-acf_placeholder';
+		$this->properties['type']  = 'column-acf_placeholder';
 		$this->properties['label'] = __( 'Advanced Custom Field', 'codepress-admin-columns' );
 		$this->properties['group'] = __( 'Advanced Custom Fields', 'codepress-admin-columns' );
 	}
